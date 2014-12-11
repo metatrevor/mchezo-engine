@@ -21,7 +21,8 @@ SOURCES += \
     src/InputManager.cpp \
     src/MenuState.cpp \
     src/MenuButton.cpp \
-    src/PauseState.cpp
+    src/PauseState.cpp \
+    src/State.cpp
 
 LIBS +=  \
     -lSDL2 \

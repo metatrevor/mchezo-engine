@@ -1,5 +1,7 @@
 #include "PauseState.h"
 #include "MenuButton.h"
+#include "StateManager.h"
+#include "MenuState.h"
 
 PauseState::PauseState()
 {
@@ -58,15 +60,17 @@ void PauseState::exit()
 
 void PauseState::handleEvents()
 {
-
+    State::handleEvents();
 }
 
 void PauseState::pauseToGame()
 {
-
+    StateMachine::instance().pop();
 }
 
 void PauseState::pauseToMenu()
 {
-
+    StateMachine::instance().pop();
+    StateMachine::instance().pop();
+    StateMachine::instance().push(new MenuState());
 }

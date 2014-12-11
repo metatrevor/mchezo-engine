@@ -25,7 +25,7 @@ void Game::handleEvents()
 
 void Game::render()
 {
-    State::run();
+    State::render();
 }
 
 void Game::update()
