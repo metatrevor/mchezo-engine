@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "MenuState.h"
+#include "PauseState.h"
 
 Game::Game()
 {
@@ -21,6 +23,10 @@ void Game::run()
 void Game::handleEvents()
 {
     State::handleEvents();
+   if(InputManager::instance().isKeyDown(SDL_SCANCODE_ESCAPE)) {
+       gameToPause();
+   }
+
 }
 
 void Game::render()
@@ -36,4 +42,9 @@ void Game::update()
 void Game::exit()
 {
  Log::Info("Exiting Gamestate...");
+}
+
+void Game::gameToPause()
+{
+    StateMachine::instance().push(new PauseState());
 }

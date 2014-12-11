@@ -14,9 +14,9 @@
 
 class Game : public State
 {
-    public:
-        Game();
-        ~Game(){}
+public:
+    Game();
+    ~Game(){}
 
     bool init();
     void run();
@@ -24,6 +24,9 @@ class Game : public State
     void update();
     void exit();
     void handleEvents();
+
+private:
+    void gameToPause();
 };
 
 #endif // ENGINE_H
