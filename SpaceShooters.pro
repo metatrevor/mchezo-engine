@@ -20,7 +20,8 @@ SOURCES += \
     src/StateManager.cpp \
     src/InputManager.cpp \
     src/MenuState.cpp \
-    src/MenuButton.cpp
+    src/MenuButton.cpp \
+    src/PauseState.cpp
 
 LIBS +=  \
     -lSDL2 \
@@ -48,6 +49,7 @@ HEADERS += \
     src/State.h \
     src/InputManager.h \
     src/MenuState.h \
-    src/MenuButton.h
+    src/MenuButton.h \
+    src/PauseState.h
 
 OTHER_FILES +=

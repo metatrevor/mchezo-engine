@@ -26,6 +26,8 @@ set(SOURCE_FILES
     src/Object.h
     src/ObjectParams.cpp
     src/ObjectParams.h
+    src/PauseState.cpp
+    src/PauseState.h
     src/Player.cpp
     src/Player.h
     src/State.h
