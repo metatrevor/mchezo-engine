@@ -14,7 +14,6 @@ public:
     virtual void exit() = 0;
     virtual ~State(){}
     std::string getStateName(){return m_stateName;}
-    bool m_running;
     std::string m_stateName;
 };
 

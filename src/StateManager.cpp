@@ -22,6 +22,7 @@ bool StateMachine::init()
         return false;
     }
     instance().change(new MenuState());
+    m_fsm_status= true;
     return true;
 }
 
@@ -32,7 +33,7 @@ void StateMachine::run(int argc, char** argv)
         Log::Error("Init failure ");
         exit(EXIT_FAILURE);
     }
-    while (m_states.back()->m_running)
+    while (m_fsm_status)
     {
         frameStart = SDL_GetTicks();
         m_states.back()->handleEvents();
@@ -82,4 +83,9 @@ void StateMachine::pop()
         delete m_states.back();
         m_states.pop_back();
     }
+}
+
+void StateMachine::quitGame()
+{
+    m_fsm_status = false;
 }

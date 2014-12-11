@@ -62,7 +62,7 @@ void MenuState::handleEvents()
 {
     InputManager::instance().update();
     if(InputManager::instance().onQuit())
-        m_running = false;
+        StateMachine::instance().quitGame();
 }
 
 void MenuState::menuToGame()

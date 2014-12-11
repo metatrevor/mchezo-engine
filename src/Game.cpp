@@ -1,8 +1,8 @@
 #include "Game.h"
+#include "StateManager.h"
 
 Game::Game()
 {
-    m_running = false;
 }
 
 bool Game::init()
@@ -11,7 +11,6 @@ bool Game::init()
     TextureManager::instance().loadTexture("animate", "assets/textures/animate.png");
     m_objects.push_back(new Player(0, 0, 128, 82, "animate"));
     m_stateName = "GAME";
-    m_running = true;
     Log::Info("Entering Gamestate...");
     return true;
 }
@@ -27,7 +26,7 @@ void Game::handleEvents()
 {
     InputManager::instance().update();
     if(InputManager::instance().onQuit())
-        m_running = false;
+        StateMachine::instance().quitGame();
 }
 
 void Game::render()

@@ -16,6 +16,8 @@ public:
     void change(State *state);
     void pop();
 
+    void quitGame();
+
 private:
     std::vector <State*> m_states;
     StateMachine();
@@ -23,6 +25,7 @@ private:
     State* m_currentState;
     Uint32 frameStart;
     Uint32 frameTime;
+    bool m_fsm_status;
 };
 
 #endif // STATEMANAGER_H
