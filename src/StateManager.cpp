@@ -21,6 +21,7 @@ bool StateMachine::init()
         Log::Error("Unable to initialize SDL");
         return false;
     }
+    TextureManager::instance().init();
     instance().change(new MenuState());
     m_fsm_status= true;
     return true;

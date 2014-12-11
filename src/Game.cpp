@@ -7,7 +7,6 @@ Game::Game()
 
 bool Game::init()
 {
-    TextureManager::instance().init();
     TextureManager::instance().loadTexture("animate", "assets/textures/animate.png");
     m_objects.push_back(new Player(0, 0, 128, 82, "animate"));
     m_stateName = "GAME";
@@ -25,8 +24,9 @@ void Game::run()
 void Game::handleEvents()
 {
     InputManager::instance().update();
-    if(InputManager::instance().onQuit())
+    if(InputManager::instance().onQuit()) {
         StateMachine::instance().quitGame();
+    }
 }
 
 void Game::render()
