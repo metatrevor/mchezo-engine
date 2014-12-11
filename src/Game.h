@@ -24,9 +24,6 @@ class Game : public State
     void update();
     void exit();
     void handleEvents();
-
-    private:
-        std::vector <Object *> m_objects;
 };
 
 #endif // ENGINE_H

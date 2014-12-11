@@ -1,10 +1,26 @@
 #ifndef PAUSESTATE_H
 #define PAUSESTATE_H
 
-class PauseState
+#include "Object.h"
+#include "State.h"
+#include <vector>
+
+class PauseState : public State
 {
 public:
     PauseState();
+
+    bool init();
+    void run();
+    void render();
+    void update();
+    void exit();
+    void handleEvents();
+
+    std::vector<Object*> m_objects;
+private:
+    static void pauseToGame();
+    static void pauseToMenu();
 };
 
 #endif // PAUSESTATE_H

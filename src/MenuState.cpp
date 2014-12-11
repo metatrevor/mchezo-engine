@@ -19,30 +19,17 @@ bool MenuState::init()
 
 void MenuState::run()
 {
-    handleEvents();
-    update();
-    render();
+    State::run();
 }
 
 void MenuState::render()
 {
-    TextureManager::instance().getWindow()->clearRenderer();
-    std::vector<Object*>::size_type i;
-    for(i = 0; i < m_objects.size(); i++)
-    {
-    m_objects[i]->draw();
-    }
-    TextureManager::instance().getWindow()->updateWindow();
+    State::render();
 }
 
 void MenuState::update()
 {
-    std::vector<Object*>::size_type i;
-    for(i = 0; i < m_objects.size(); i++)
-    {
-    m_objects[i]->update();
-    }
-
+    State::update();
 }
 
 void MenuState::exit()
@@ -60,9 +47,7 @@ void MenuState::exit()
 
 void MenuState::handleEvents()
 {
-    InputManager::instance().update();
-    if(InputManager::instance().onQuit())
-        StateMachine::instance().quitGame();
+    State::handleEvents();
 }
 
 void MenuState::menuToGame()

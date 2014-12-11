@@ -31,6 +31,7 @@ set(SOURCE_FILES
     src/Player.cpp
     src/Player.h
     src/State.h
+    src/State.cpp
     src/StateManager.cpp
     src/StateManager.h
     src/TextureManager.cpp
