@@ -13,8 +13,8 @@ bool PauseState::init()
     Log::Info("Entering Pausestate...\n");
     TextureManager::instance().loadTexture("resume", "assets/textures/resume.png");
     TextureManager::instance().loadTexture("main_menu", "assets/textures/main_menu.png");
-    m_objects.push_back(new MenuButton(100, 100, 400, 100, "resume", pauseToGame));
-    m_objects.push_back(new MenuButton(100, 300, 400, 100, "main_menu", pauseToMenu));
+    m_objects.push_back(new MenuButton(200, 100, 200, 80, "resume", pauseToGame));
+    m_objects.push_back(new MenuButton(200, 300, 200, 80, "main_menu", pauseToMenu));
     return true;
 }
 
@@ -47,15 +47,10 @@ void PauseState::update()
 
 void PauseState::exit()
 {
-    std::vector<Object*>::size_type i;
-    for(i = 0; i < m_objects.size(); i++)
-    {
-        m_objects[i]->clean();
-    }
-    m_objects.clear();
+    State::exit();
     TextureManager::instance().deleteTexture("main_menu");
     TextureManager::instance().deleteTexture("resume");
-    Log::Info("Exiting Menustate...\n");
+    Log::Info("Exiting Pausestate...\n");
 }
 
 void PauseState::handleEvents()
@@ -65,12 +60,13 @@ void PauseState::handleEvents()
 
 void PauseState::pauseToGame()
 {
+    Log::Info("Pause to Game clicked");
     StateMachine::instance().pop();
+    Log::Info("Resuming Game state");
 }
 
 void PauseState::pauseToMenu()
 {
-    StateMachine::instance().pop();
-    StateMachine::instance().pop();
+    Log::Info("Pause to Menu clicked");
     StateMachine::instance().push(new MenuState());
 }

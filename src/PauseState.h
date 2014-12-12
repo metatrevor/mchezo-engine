@@ -17,7 +17,6 @@ public:
     void exit();
     void handleEvents();
 
-    std::vector<Object*> m_objects;
 private:
     static void pauseToGame();
     static void pauseToMenu();

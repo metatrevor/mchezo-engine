@@ -1,5 +1,4 @@
 #include "StateManager.h"
-#include "Log.h"
 #include "MenuState.h"
 
 StateMachine &StateMachine::instance()
@@ -29,7 +28,7 @@ bool StateMachine::init()
 
 void StateMachine::run(int argc, char** argv)
 {
-    if(init() == false)
+    if(!init())
     {
         Log::Error("Init failure ");
         exit(EXIT_FAILURE);
@@ -48,7 +47,6 @@ void StateMachine::run(int argc, char** argv)
             SDL_Delay((int)(FRAMEDELTA - frameTime));
         }
     }
-    m_states.back()->exit();
 }
 
 void StateMachine::push(State *state)
@@ -80,6 +78,7 @@ void StateMachine::pop()
 {
     if(!m_states.empty())
     {
+        Log::Info("Popping..." + m_states.back()->m_stateName);
         m_states.back()->exit();
         delete m_states.back();
         m_states.pop_back();
@@ -88,5 +87,6 @@ void StateMachine::pop()
 
 void StateMachine::quitGame()
 {
+    m_states.clear();
     m_fsm_status = false;
 }

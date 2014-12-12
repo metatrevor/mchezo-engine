@@ -34,3 +34,13 @@ void State::handleEvents()
     if (InputManager::instance().onQuit())
         StateMachine::instance().quitGame();
 }
+
+void State::exit()
+{
+    std::vector<Object*>::size_type i;
+    for(i = 0; i < m_objects.size(); i++)
+    {
+        m_objects[i]->clean();
+    }
+    m_objects.clear();
+}

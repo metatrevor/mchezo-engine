@@ -12,7 +12,7 @@ public:
     virtual void render();
     virtual void update();
     virtual void handleEvents();
-    virtual void exit() = 0;
+    virtual void exit();
     virtual ~State(){}
     std::string getStateName(){return m_stateName;}
     std::string m_stateName;
