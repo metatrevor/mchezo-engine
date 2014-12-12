@@ -9,11 +9,11 @@ MenuState::MenuState()
 bool MenuState::init()
 {
     m_stateName = "MENU";
-    Log::Info("Entering Menustate...\n");
+    Log::Info("Entering Menustate...");
     TextureManager::instance().loadTexture("play", "assets/textures/button.png");
     TextureManager::instance().loadTexture("exit", "assets/textures/exit.png");
     m_objects.push_back(new MenuButton(100, 100, 400, 100, "play", menuToGame));
-    m_objects.push_back(new MenuButton(100, 300, 400, 100, "exit", gameToMenu));
+    m_objects.push_back(new MenuButton(100, 300, 400, 100, "exit", menuToQuit));
     return true;
 }
 
@@ -34,15 +34,9 @@ void MenuState::update()
 
 void MenuState::exit()
 {
-    std::vector<Object*>::size_type i;
-    for(i = 0; i < m_objects.size(); i++)
-    {
-        m_objects[i]->clean();
-    }
-    m_objects.clear();
     TextureManager::instance().deleteTexture("play");
     TextureManager::instance().deleteTexture("exit");
-    Log::Info("Exiting Menustate...\n");
+    Log::Info("Exiting Menustate...");
 }
 
 void MenuState::handleEvents()
@@ -57,7 +51,9 @@ void MenuState::menuToGame()
     StateMachine::instance().push(new Game());
 }
 
-void MenuState::gameToMenu()
+void MenuState::menuToQuit()
 {
+    Log::Info("Menu to Quit clicked");
+    StateMachine::instance().pop();
     StateMachine::instance().quitGame();
 }

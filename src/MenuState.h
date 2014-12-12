@@ -20,7 +20,7 @@ public:
 
 private:
     static void menuToGame();
-    static void gameToMenu();
+    static void menuToQuit();
 };
 
 #endif // MENUSTATE_H
