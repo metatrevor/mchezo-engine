@@ -22,7 +22,9 @@ SOURCES += \
     src/MenuState.cpp \
     src/MenuButton.cpp \
     src/PauseState.cpp \
-    src/State.cpp
+    src/State.cpp \
+    src/AnimatedGraphic.cpp \
+    src/GameOverState.cpp
 
 LIBS +=  \
     -lSDL2 \
@@ -51,6 +53,8 @@ HEADERS += \
     src/InputManager.h \
     src/MenuState.h \
     src/MenuButton.h \
-    src/PauseState.h
+    src/PauseState.h \
+    src/AnimatedGraphic.h \
+    src/GameOverState.h
 
 OTHER_FILES +=

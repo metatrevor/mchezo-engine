@@ -5,10 +5,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
     src/Defines.h
+    src/AnimatedGraphic.cpp
+    src/AnimatedGraphic.h
     src/Enemy.cpp
     src/Enemy.h
     src/Game.cpp
     src/Game.h
+    src/GameOverState.cpp
+    src/GameOverState.h
     src/Graphics.cpp
     src/Graphics.h
     src/InputManager.cpp
