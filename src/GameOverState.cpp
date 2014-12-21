@@ -15,7 +15,7 @@ bool GameOverState::init()
     TextureManager::instance().loadTexture("gameovertext", "assets/textures/gameover.png");
     TextureManager::instance().loadTexture("restart", "assets/textures/restart.png");
     TextureManager::instance().loadTexture("main", "assets/textures/main_menu.png");
-    m_objects.push_back(new AnimatedGraphic(200, 100, 200, 80, "gameovertext", 2));
+    m_objects.push_back(new AnimatedGraphic(200, 100, 190, 30, "gameovertext", 2));
     m_objects.push_back(new MenuButton(200, 300, 200, 80, "main_menu", gameOverToMenu));
     m_objects.push_back(new MenuButton(200, 300, 200, 80, "restart", gameOverToRestartGame));
     return true;
