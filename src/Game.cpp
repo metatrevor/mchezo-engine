@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "MenuState.h"
 #include "PauseState.h"
-#include "Enemy.h"
+#include "GameOverState.h"
 
 Game::Game()
 {
@@ -40,6 +40,10 @@ void Game::render()
 void Game::update()
 {
     State::update();
+    if (testCollision(dynamic_cast<Object*>(m_objects[0]),dynamic_cast<Object*>(m_objects[1])))
+    {
+        StateMachine::instance().push(new GameOverState());
+    }
 }
 
 void Game::exit()
@@ -50,4 +54,31 @@ void Game::exit()
 void Game::gameToPause()
 {
     StateMachine::instance().push(new PauseState());
+}
+
+bool Game::testCollision(Object *obj1, Object *obj2)
+{
+    int left1, left2;
+    int right1, right2;
+    int top1, top2;
+    int bottom1, bottom2;
+
+    //Get the sides of the first object
+
+    left1 = (int)obj1->getPosition().getX();
+    right1 = left1 + obj1->getWidth();
+    top1 = (int)obj1->getPosition().getY();
+    bottom1 = top1 + obj1->getHeight();
+
+    //Get the sides of the second object
+    left2 = (int)obj2->getPosition().getX();
+    right2 = left2 + obj2->getWidth();
+    top2 = (int)obj2->getPosition().getY();
+    bottom2 = top2 + obj2->getHeight();
+
+    if(bottom1 <= top2){return false;}
+    if(top1 >= bottom2){return false;}
+    if(right1 <= left1){return false;}
+    if(left1 >= right2){return false;}
+
 }

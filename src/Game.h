@@ -25,6 +25,8 @@ public:
     void exit();
     void handleEvents();
 
+    bool testCollision(Object *obj1, Object *obj2);
+
 private:
     void gameToPause();
 };
