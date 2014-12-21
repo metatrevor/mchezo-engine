@@ -42,6 +42,7 @@ void Game::update()
     State::update();
     if (testCollision(dynamic_cast<Object*>(m_objects[0]),dynamic_cast<Object*>(m_objects[1])))
     {
+        StateMachine::instance().pop();
         StateMachine::instance().push(new GameOverState());
     }
 }
