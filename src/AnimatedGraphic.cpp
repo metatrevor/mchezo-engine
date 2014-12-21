@@ -10,12 +10,15 @@ AnimatedGraphic::AnimatedGraphic(int x, int y, int height, int width, std::strin
 
 void AnimatedGraphic::draw()
 {
-    Object::draw();
+    TextureManager::instance().drawFrame(m_textureKeyName, (int)m_position.getX(),(int)m_position.getY(), m_width, m_height,
+            m_currentRow, m_currentFrame);
 }
 
 void AnimatedGraphic::update()
 {
-    m_currentFrame = int((SDL_GetTicks()/1000 / m_animationSpeed) % 5);
+    Object::update();
+
+    m_currentFrame = int((SDL_GetTicks()/1000 / m_animationSpeed) % 2);
 
     if(m_position.getY() < 0)
     {
@@ -25,7 +28,6 @@ void AnimatedGraphic::update()
     {
         m_velocity.setY(-2);
     }
-    Object::update();
 }
 
 
