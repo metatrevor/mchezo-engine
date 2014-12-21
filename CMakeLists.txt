@@ -17,6 +17,10 @@ set(SOURCE_FILES
     src/Graphics.h
     src/InputManager.cpp
     src/InputManager.h
+    src/Layer.cpp
+    src/Layer.h
+    src/Level.h
+    src/Level.cpp
     src/Log.cpp
     src/Log.h
     src/Main.cpp
