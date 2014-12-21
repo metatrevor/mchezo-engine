@@ -6,7 +6,8 @@ Object::Object(int x, int y, int width, int height, std::string textureName)
      m_textureKeyName(textureName),
      m_position(x, y),
      m_velocity(0, 0),
-     m_acceleration(0, 0) {
+     m_acceleration(0, 0)
+{
      m_currentFrame = 1;
      m_currentRow = 1;
 }

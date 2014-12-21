@@ -13,7 +13,9 @@ public:
    virtual void draw() = 0;
    virtual void update() = 0;
    virtual void clean() = 0;
-
+   Vector2D &getPosition(){return m_position; }
+   int getHeight() {return m_height; }
+   int getWidth() {return m_width; }
 protected:
 
     int m_width;
