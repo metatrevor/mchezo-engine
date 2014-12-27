@@ -2,6 +2,7 @@
 #include "MenuState.h"
 #include "PauseState.h"
 #include "GameOverState.h"
+#include "LevelParser.h"
 
 Game::Game()
 {
@@ -9,6 +10,9 @@ Game::Game()
 
 bool Game::init()
 {
+    LevelParser levelParser;
+    m_level = levelParser.parseLevel("assets/textures/map1.tmx");
+
     TextureManager::instance().loadTexture("animate", "assets/textures/player.png");
     TextureManager::instance().loadTexture("enemy", "assets/textures/enemy.png");
     m_objects.push_back(new Player(500, 100, 128, 55, "animate"));
@@ -34,17 +38,24 @@ void Game::handleEvents()
 
 void Game::render()
 {
-    State::render();
+    TextureManager::instance().getWindow()->clearRenderer();
+    m_level->render();
+    std::vector<Object*>::size_type i;
+    for (i = 0; i < m_objects.size(); i++) {
+        m_objects[i]->draw();
+    }
+    TextureManager::instance().getWindow()->updateWindow();
 }
 
 void Game::update()
 {
-    State::update();
+    //State::update();
     if (testCollision(dynamic_cast<Object*>(m_objects[0]),dynamic_cast<Object*>(m_objects[1])))
     {
         StateMachine::instance().pop();
         StateMachine::instance().push(new GameOverState());
     }
+    m_level->update();
 }
 
 void Game::exit()
@@ -81,5 +92,15 @@ bool Game::testCollision(Object *obj1, Object *obj2)
     if(top1 >= bottom2){return false;}
     if(right1 <= left1){return false;}
     if(left1 >= right2){return false;}
+    return true;
+}
 
+
+int Game::getGameWidth() const
+{
+    return m_gameWidth;
+}
+int Game::getGameHeight() const
+{
+    return m_gameHeight;
 }

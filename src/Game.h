@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "State.h"
 #include "InputManager.h"
+#include "Level.h"
 
 #include <vector>
 
@@ -24,11 +25,16 @@ public:
     void update();
     void exit();
     void handleEvents();
+    int getGameWidth() const;
+    int getGameHeight() const;
 
     bool testCollision(Object *obj1, Object *obj2);
 
 private:
     void gameToPause();
+    int m_gameWidth;
+    int m_gameHeight;
+    Level *m_level;
 };
 
 #endif // ENGINE_H
