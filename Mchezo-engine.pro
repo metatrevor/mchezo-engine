@@ -6,7 +6,6 @@ CONFIG -= qt
 SOURCES += \
     src/Enemy.cpp \
     src/Game.cpp \
-    src/Graphics.cpp \
     src/Log.cpp \
     src/Main.cpp \
     src/Network.cpp \
@@ -45,7 +44,6 @@ HEADERS += \
     src/Defines.h \
     src/Enemy.h \
     src/Game.h \
-    src/Graphics.h \
     src/Log.h \
     src/Network.h \
     src/Object.h \
