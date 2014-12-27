@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.4)
-project(SpaceShooters)
+project(Mchezo-engine)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -13,8 +13,6 @@ set(SOURCE_FILES
     src/Game.h
     src/GameOverState.cpp
     src/GameOverState.h
-    src/Graphics.cpp
-    src/Graphics.h
     src/InputManager.cpp
     src/InputManager.h
     src/Layer.cpp
@@ -62,7 +60,7 @@ set(SOURCE_FILES
     src/common/base64/base64.cpp
     )
 
-add_executable(SpaceShooters ${SOURCE_FILES})
+add_executable(Mchezo-engine ${SOURCE_FILES})
 find_package (ZLIB)
 
 
