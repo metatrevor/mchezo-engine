@@ -47,7 +47,6 @@ void MenuState::handleEvents()
 void MenuState::menuToGame()
 {
     Log::Info("Menu to Game clicked");
-    StateMachine::instance().pop();
     StateMachine::instance().push(new Game());
 }
 
