@@ -5,7 +5,8 @@
 #include <string>
 #include "Layer.h"
 
-struct Tileset
+//Holds information about tileset also called the spritesheet
+struct TileSet
 {
     int firstgridId;
     int tileWidth;
@@ -18,21 +19,38 @@ struct Tileset
     std::string name;
 };
 
+//The level class holds a vector of tileset and layer objects
+
 class Level
 {
 public:
-    Level();
+
     ~Level();
 
+    //Update the layers
     void update();
+
+    //Render the layers
     void render();
 
-    std::vector<Tileset> *getTilesets() { return &m_tilesets; }
-    std::vector<Layer*> *getLayers(){return &m_layers;}
+    std::vector<TileSet> *getTileSets()
+    {
+        return &m_tileSets;
+    }
+
+    std::vector<Layer*> *getLayers()
+    {
+        return &m_layers;
+    }
 
 private:
-    std::vector<Tileset> m_tilesets;
+    std::vector<TileSet> m_tileSets;
     std::vector<Layer*> m_layers;
+
+    friend class LevelParser;
+    //The level is only to be initialised with LevelParser class
+    Level()
+    {}
 };
 
 #endif
