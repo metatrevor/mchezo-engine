@@ -19,6 +19,9 @@ Window *TextureManager::getWindow() {
 
 
 bool TextureManager::loadTexture(std::string keyName, std::string fileName) {
+
+    Log::Info("Attempting to load: "+fileName);
+
     SDL_Surface *tempSurface = IMG_Load(fileName.c_str());
 
     if (tempSurface == NULL) {
@@ -101,5 +104,24 @@ void TextureManager::deleteTexture(std::string keyName) {
         m_textureMap.erase(keyName);
     } else {
         Log::Error("The texture " + keyName +" was not found during deleting");
+    }
+}
+
+void TextureManager::drawTile(std::string id, int margin,
+                              int spacing, int x, int y,
+                              int width, int height,
+                              int currentRow, int currentFrame)
+{
+    SDL_Rect srcRect;
+    SDL_Rect destRect;
+    srcRect.x = margin + (spacing + width) * currentFrame;
+    srcRect.y = margin + (spacing + height) * currentRow;
+    srcRect.w = destRect.w = width;
+    srcRect.h = destRect.h = height;
+    destRect.x = x;
+    destRect.y = y;
+    if (SDL_RenderCopyEx(m_window->getRenderer(), m_textureMap[id], &srcRect,
+            &destRect, 0, 0, SDL_FLIP_NONE) != 0) {
+        Log::Error("SDL_RenderCopyEx for texture " + id);
     }
 }
