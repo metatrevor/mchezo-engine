@@ -24,13 +24,21 @@ SOURCES += \
     src/PauseState.cpp \
     src/State.cpp \
     src/AnimatedGraphic.cpp \
-    src/GameOverState.cpp
+    src/GameOverState.cpp \
+    src/Layer.cpp \
+    src/Level.cpp \
+    src/LevelParser.cpp \
+    src/TileLayer.cpp \
+    src/common/base64/base64.cpp \
+    src/ObjectLayer.cpp
 
 LIBS +=  \
     -lSDL2 \
     -lSDL2_image \
     -lSDL2_mixer \
-    -lSDL2_ttf
+    -lSDL2_ttf \
+    -lz \
+    -ltinyxml2
 
 
 HEADERS += \
@@ -55,6 +63,12 @@ HEADERS += \
     src/MenuButton.h \
     src/PauseState.h \
     src/AnimatedGraphic.h \
-    src/GameOverState.h
+    src/GameOverState.h \
+    src/Layer.h \
+    src/Level.h \
+    src/LevelParser.h \
+    src/TileLayer.h \
+    src/common/base64/base64.h \
+    src/ObjectLayer.h
 
 OTHER_FILES +=
