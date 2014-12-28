@@ -10,6 +10,7 @@ class Object
 {
 public:
    Object(int x, int y, int width, int height, std::string textureName);
+   Object(ObjectParams *params);
    virtual void draw() = 0;
    virtual void update() = 0;
    virtual void clean() = 0;

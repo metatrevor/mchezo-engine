@@ -27,3 +27,14 @@ void Object::clean()
 {
 
 }
+
+Object::Object(ObjectParams *params)
+    :m_width(params->getWidth()),
+     m_height(params->getHeight()),
+     m_textureKeyName(params->getTextureName()),
+     m_position(params->getX(), params->getY()),
+     m_velocity(0, 0),
+     m_acceleration(0, 0)
+{
+
+}
