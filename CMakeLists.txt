@@ -32,6 +32,8 @@ set(SOURCE_FILES
     src/Network.h
     src/Object.cpp
     src/Object.h
+    src/ObjectFactory.h
+    src/ObjectFactory.cpp
     src/ObjectLayer.h
     src/ObjectLayer.cpp
     src/ObjectParams.cpp

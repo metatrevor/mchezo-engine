@@ -29,7 +29,8 @@ SOURCES += \
     src/LevelParser.cpp \
     src/TileLayer.cpp \
     src/common/base64/base64.cpp \
-    src/ObjectLayer.cpp
+    src/ObjectLayer.cpp \
+    src/ObjectFactory.cpp
 
 LIBS +=  \
     -lSDL2 \
@@ -67,6 +68,7 @@ HEADERS += \
     src/LevelParser.h \
     src/TileLayer.h \
     src/common/base64/base64.h \
-    src/ObjectLayer.h
+    src/ObjectLayer.h \
+    src/ObjectFactory.h
 
 OTHER_FILES +=
