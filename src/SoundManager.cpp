@@ -6,6 +6,10 @@ SoundManager::SoundManager()
     Mix_OpenAudio(SOUND_FREQUENCY, SOUND_FORMAT, SOUND_CHANNELS, SOUND_CHUNKSIZE);
 }
 
+SoundManager::~SoundManager()
+{
+    Mix_CloseAudio();
+}
 SoundManager &SoundManager::instance()
 {
     static SoundManager m_instance;
@@ -48,10 +52,10 @@ bool SoundManager::loadSound(std::string keyName, std::string fileName, audio_ty
 
 }
 
-void SoundManager::playSound(std::string keyName, bool loop) {
-
+void SoundManager::playSound(std::string keyName, int loop) {
+    Mix_PlayChannel(-1, m_soundbuffers[keyName], loop);
 }
 
-void SoundManager::playMusic(std::string keyName, bool loop) {
-
+void SoundManager::playMusic(std::string keyName, int loop) {
+    Mix_PlayMusic(m_musicbuffers[keyName], loop);
 }
