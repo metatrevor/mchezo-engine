@@ -29,7 +29,16 @@ bool SoundManager::loadSound(std::string keyName, std::string fileName, audio_ty
 
     else if(type == SOUND_MUSIC)
     {
-
+        Mix_Music *chunk = Mix_LoadMUS(fileName.c_str());
+        if(chunk == 0) {
+            Log::Error("Failed to load Music :  " + fileName);
+            Log::Error(Mix_GetError());
+            return false;
+        }
+        else {
+            m_musicbuffers[keyName] = chunk;
+            return true;
+        }
     }
 
     else {
