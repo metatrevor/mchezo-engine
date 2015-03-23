@@ -25,6 +25,7 @@ private:
     State* m_currentState;
     Uint32 frameStart;
     Uint32 frameTime;
+    bool m_init_status;
     bool m_fsm_status;
 };
 

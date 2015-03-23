@@ -23,6 +23,7 @@ bool StateMachine::init()
     TextureManager::instance().init();
     instance().change(new MenuState());
     m_fsm_status= true;
+    m_init_status = true;
     return true;
 }
 
@@ -33,20 +34,28 @@ void StateMachine::run(int argc, char** argv)
         Log::Error("Init failure ");
         exit(EXIT_FAILURE);
     }
-    while (m_fsm_status)
+
+    if(m_init_status)
     {
-        frameStart = SDL_GetTicks();
-        m_states.back()->handleEvents();
-        m_states.back()->update();
-        m_states.back()->render();
+        do {
+                frameStart = SDL_GetTicks();
+                m_states.back()->handleEvents();
+                m_states.back()->update();
+                m_states.back()->render();
 
-        frameTime = SDL_GetTicks() - frameStart;
+                frameTime = SDL_GetTicks() - frameStart;
 
-        if(frameTime < FRAMEDELTA)
-        {
-            SDL_Delay((int)(FRAMEDELTA - frameTime));
+                if(frameTime < FRAMEDELTA)
+                {
+                    SDL_Delay((int)(FRAMEDELTA - frameTime));
+                }
         }
+         while (m_fsm_status);
+         m_states.back()->exit();
+         m_states.clear();
     }
+
+
 }
 
 void StateMachine::push(State *state)
@@ -87,6 +96,5 @@ void StateMachine::pop()
 
 void StateMachine::quitGame()
 {
-    m_states.clear();
     m_fsm_status = false;
 }
