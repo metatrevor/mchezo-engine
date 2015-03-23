@@ -30,7 +30,8 @@ SOURCES += \
     src/TileLayer.cpp \
     src/common/base64/base64.cpp \
     src/ObjectLayer.cpp \
-    src/ObjectFactory.cpp
+    src/ObjectFactory.cpp \
+    src/SoundManager.cpp
 
 LIBS +=  \
     -lSDL2 \
@@ -69,6 +70,7 @@ HEADERS += \
     src/TileLayer.h \
     src/common/base64/base64.h \
     src/ObjectLayer.h \
-    src/ObjectFactory.h
+    src/ObjectFactory.h \
+    src/SoundManager.h
 
 OTHER_FILES +=
