@@ -1,0 +1,3 @@
+[submodule "src/common/tmxparser"]
+	path = src/common/tmxparser
+	url = https://github.com/andrewrk/tmxparser.git
