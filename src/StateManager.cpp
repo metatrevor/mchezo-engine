@@ -23,7 +23,6 @@ bool StateMachine::init()
     TextureManager::instance().init();
     instance().change(new MenuState());
     m_fsm_status= true;
-    m_init_status = true;
     return true;
 }
 
@@ -35,7 +34,7 @@ void StateMachine::run(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
-    if(m_init_status)
+    if(m_fsm_status)
     {
         do {
                 frameStart = SDL_GetTicks();
