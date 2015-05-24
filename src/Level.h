@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "Layer.h"
+#include <tinyxml2.h>
 
 //Holds information about tileset also called the spritesheet
 struct TileSet
@@ -25,6 +26,9 @@ class Level
 {
 public:
 
+    Level()
+    {}
+
     ~Level();
 
     //Update the layers
@@ -32,6 +36,8 @@ public:
 
     //Render the layers
     void render();
+
+    Level *parseLevel(const char *levelFile);
 
     std::vector<TileSet> *getTileSets()
     {
@@ -49,8 +55,21 @@ private:
 
     friend class LevelParser;
     //The level is only to be initialised with LevelParser class
-    Level()
-    {}
+
+
+    void parseTileSets( tinyxml2::XMLElement  *tileSetRoot,
+                        std::vector<TileSet> *tileSets);
+    void parseTileLayer(tinyxml2::XMLElement *tileElement,
+                        std::vector<Layer*> *layers,
+                        const std::vector<TileSet>* tileSets);
+    void parseTextures(tinyxml2::XMLElement  *textureRoot);
+    void parseObjectLayer(tinyxml2::XMLElement *objectElement,
+                          std::vector<Layer*> *layers);
+
+    int m_tileSize;      //Tile width in px
+    int m_width_columns; //Tile columns
+    int m_height_rows;   //Tile rows
+
 };
 
 #endif

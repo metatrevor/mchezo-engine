@@ -19,8 +19,6 @@ set(SOURCE_FILES
     src/Layer.h
     src/Level.h
     src/Level.cpp
-    src/LevelParser.h
-    src/LevelParser.cpp
     src/Log.cpp
     src/Log.h
     src/Main.cpp

@@ -2,7 +2,7 @@
 #include "MenuState.h"
 #include "PauseState.h"
 #include "GameOverState.h"
-#include "LevelParser.h"
+
 
 Game::Game()
 {
@@ -10,8 +10,9 @@ Game::Game()
 
 bool Game::init()
 {
-    LevelParser levelParser;
-    m_level = levelParser.parseLevel("assets/textures/map1.tmx");
+    m_level = new Level();
+
+    m_level->parseLevel("assets/textures/map1.tmx");
 
     TextureManager::instance().loadTexture("animate", "assets/textures/player.png");
     TextureManager::instance().loadTexture("enemy", "assets/textures/enemy.png");
