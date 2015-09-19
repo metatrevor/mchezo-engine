@@ -1,35 +1,22 @@
-#
-# This module will look for Tmxparser (https://github.com/andrewrk/tmxparser)
-# it will define the following values
-#
-# TMXPARSER_INCLUDE_DIR  = where Tmx.h can be found
-# TMXPARSER_LIBRARY      = the library to link against (Tmxparser)
-#
+# TMXPARSER_INCLUDE_DIR
+# TMXPARSER_LIBRARY
+# TMXPARSER_FOUND
 
-SET(TRIAL_INCLUDE_PATHS Tmx.h
-     HINTS $ENV{TMXPARSER_HOME}
-     PATH_SUFFIXES include include/tmxparser
-     PATHS
-     ~/Library/Frameworks
-     /Library/Frameworks
-     /usr/local
-     /usr
-  )
-
-SET(TRIAL_LIBRARY_PATHS
-   HINTS $ENV{TMXPARSER_HOME}
-   PATH_SUFFIXES lib64 lib
-   PATHS
-   ~/Library/Frameworks
-   /Library/Frameworks
-   /usr/local
-   /usr
-  )
-
-FIND_PATH(TMXPARSER_INCLUDE_DIR Tmx.h ${TRIAL_INCLUDE_PATHS})
-FIND_LIBRARY(TMXPARSER_LIBRARY tmx-parser ${TRIAL_LIBRARY_PATHS})
-
-MARK_AS_ADVANCED(
-    TMXPARSER_INCLUDE_DIR
-    TMXPARSER_LIBRARY
+find_path(TMXPARSER_INCLUDE_DIR NAMES tmxparser/Tmx.h
+        DOC "The tmxparser include directory"
 )
+
+find_library(TMXPARSER_LIBRARY NAMES tmxparser
+        DOC "The tmxparser library"
+)
+
+if(TMXPARSER_LIBRARY)
+    set(TMXPARSER_FOUND TRUE)
+else()
+    set(TMXPARSER_FOUND FALSE)
+endif()
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(TMXPARSER DEFAULT_MSG TMXPARSER_LIBRARY TMXPARSER_INCLUDE_DIR)
+
+mark_as_advanced(TMXPARSER_INCLUDE_DIR TMXPARSER_LIBRARY)
