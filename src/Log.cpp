@@ -25,7 +25,7 @@ void Log::Print(std::string message)
 
 void Log::Info(std::string message, ...)
 {
-    Log::Instance()->Print("\nINFO : "+ message);
+    Log::Instance()->Print("\nINFO : "+ message + "\n");
 }
 
 std::string Log::IntToString(int value)
@@ -37,13 +37,28 @@ std::string Log::IntToString(int value)
 
 void Log::Error(std::string message)
 {
+    Log::Instance()->Print("\nERROR "+ message  + "\n");
+}
+
+std::string Log::GetSDLError()
+{
+    std::string message;
+
     const char *sdl_error = SDL_GetError();
 
     if(strlen(sdl_error) != 0)
     {
-        message += "\nSDL_Exception: ";
-        message += sdl_error;
+         message += "\nSDL_Exception: ";
+         message += sdl_error;
     }
+
+    return message;
+}
+
+std::string Log::GetSDLIMGError() {
+
+    std::string message;
+
     const char *img_error = TTF_GetError();
 
     if( strlen(img_error) != 0 )
@@ -51,6 +66,13 @@ void Log::Error(std::string message)
         message += "\nIMG_Exception: ";
         message += img_error;
     }
+
+    return message;
+}
+
+std::string Log::GetSDLTTFError() {
+
+    std::string message;
 
     const char * ttf_error = TTF_GetError();
 
@@ -60,8 +82,5 @@ void Log::Error(std::string message)
         message += ttf_error;
     }
 
-    Log::Instance()->Print("ERROR "+ message);
+    return message;
 }
-
-
-
