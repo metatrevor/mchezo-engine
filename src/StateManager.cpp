@@ -17,7 +17,7 @@ bool StateMachine::init()
 {
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
-        Log::Error("Unable to initialize SDL");
+        Log::Error("Unable to initialize SDL" + Log::GetSDLError());
         return false;
     }
     TextureManager::instance().init();
@@ -30,7 +30,7 @@ void StateMachine::run(int argc, char** argv)
 {
     if(!init())
     {
-        Log::Error("Init failure ");
+        Log::Error("Init failure " + Log::GetSDLError());
         exit(EXIT_FAILURE);
     }
 

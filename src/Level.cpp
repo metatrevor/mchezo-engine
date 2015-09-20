@@ -32,7 +32,40 @@ void Level::update()
 
 Level *Level::parseLevel(const char *levelFile)
 {
-    //Load the map file
+    //Load with TMX Parser
+
+    m_map = new Tmx::Map();
+
+    m_map->ParseFile(levelFile);
+
+    if (m_map->HasError()) {
+        Log::Error("Loading Map : " + m_map->GetErrorText());
+        switch(m_map->GetErrorCode()){
+            case Tmx::MapError::TMX_COULDNT_OPEN: {
+                Log::Error("The Map Couldn't be opened");
+                break;
+            }
+
+            case Tmx::MapError::TMX_INVALID_FILE_SIZE:
+            {
+                Log::Error("Invalid file size");
+                break;
+            }
+
+            case Tmx::MapError::TMX_PARSING_ERROR:
+            {
+                Log::Error("There was an error in parsing the map file");
+                break;
+            }
+
+            default:
+                break;
+        }
+
+        //TODO: Proper map loading error handling otherwise lets exit
+        std::exit(0);
+    }
+
     tinyxml2::XMLDocument levelDocument;
     levelDocument.LoadFile(levelFile);
 
@@ -41,16 +74,20 @@ Level *Level::parseLevel(const char *levelFile)
     tinyxml2::XMLElement *root = levelDocument.RootElement();
 
     //Load map info
-    root->QueryIntAttribute("tilewidth", &m_tileSize); //Tile width in pixels
-    root->QueryIntAttribute("width", &m_width_columns); //No of columns
-    root->QueryIntAttribute("height", &m_height_rows); //No of rows
+    m_tileSize = m_map->GetTileWidth();
+    m_width_columns = m_map->GetWidth();
+    m_height_rows = m_map->GetHeight();
 
     //Parse the tilesets
-    for (tinyxml2::XMLElement *e = root->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
-        if (e->Value() == std::string("tileset")) {
-            parseTileSets(e, this->getTileSets());
-        }
+
+    for(int i = 0; i < m_map->GetNumTilesets(); ++i) {
+
+        const Tmx::Tileset *tileSet = m_map->GetTileset(i);
+
+        TextureManager::instance().loadTexture(tileSet->GetName() ,(std::string)"assets/textures/"+tileSet->GetImage()->GetSource());
     }
+
+
     //Parse tile layers
     for (tinyxml2::XMLElement *e = root->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("layer") || e->Value() == std::string("objectgroup")) {
@@ -59,41 +96,16 @@ Level *Level::parseLevel(const char *levelFile)
                 parseObjectLayer(e, this->getLayers());
             }
             else if(e->FirstChildElement()->Value() == std::string("data")) {
-                parseTileLayer(e, this->getLayers(), this->getTileSets());
+                parseTileLayer(e, this->getLayers(), m_map->GetTilesets());
             }
         }
     }
 }
 
-void Level::parseTileSets(tinyxml2::XMLElement *tileSetRoot, std::vector<TileSet> *tileSets)
-{
-    TextureManager::instance().loadTexture(tileSetRoot->Attribute("name") ,(std::string)"assets/textures/"+tileSetRoot->FirstChildElement()->Attribute("source"));
-
-    TileSet tileSet;
-
-    //Load tileset attributes
-    tileSetRoot->QueryIntAttribute("firstgid", &tileSet.firstgridId);
-    tileSet.name = tileSetRoot->Attribute("name");
-    tileSetRoot->QueryIntAttribute("tilewidth", &tileSet.tileWidth);
-    tileSetRoot->QueryIntAttribute("tileheight", &tileSet.tileHeight);
-    tileSetRoot->QueryIntAttribute("spacing", &tileSet.spacing);
-    tileSetRoot->QueryIntAttribute("margin", &tileSet.margin);
-
-    //Load tileset image attributes
-    tileSetRoot->FirstChildElement()->QueryIntAttribute("width" , &tileSet.width);
-    tileSetRoot->FirstChildElement()->QueryIntAttribute("height", &tileSet.height);
-
-    //Calculate the tileset columns taking into account the image width & spacing
-    tileSet.numColumns = tileSet.width / (tileSet.tileWidth + tileSet.spacing);
-
-    tileSets->push_back(tileSet);
-}
-
-
-void Level::parseTileLayer(tinyxml2::XMLElement *tileElement, std::vector<Layer*>*layers, const std::vector<TileSet> *tileSets)
+void Level::parseTileLayer(tinyxml2::XMLElement *tileElement, std::vector<Layer*>*layers, const std::vector< Tmx::Tileset* > &tileSets)
 {
 
-    TileLayer *tileLayer = new TileLayer(m_tileSize, *tileSets);
+    TileLayer *tileLayer = new TileLayer(m_tileSize, tileSets);
 
     //Multidimesional int array to hold the decoded uncompresssed tile id data
     std::vector<std::vector<int> > data;
@@ -143,12 +155,6 @@ void Level::parseTileLayer(tinyxml2::XMLElement *tileElement, std::vector<Layer*
     layers->push_back(tileLayer);
 }
 
-//Parse the level textures
-void Level::parseTextures(tinyxml2::XMLElement *textureRoot)
-{
-    TextureManager::instance().loadTexture(textureRoot->Attribute("name"),
-                                           (std::string)"assets/textures/"+textureRoot->FirstChildElement()->Attribute("source"));
-}
 
 //Parse object layers
 void Level::parseObjectLayer(tinyxml2::XMLElement *objectElement, std::vector<Layer*> *layers)
