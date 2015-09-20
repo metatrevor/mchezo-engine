@@ -37,7 +37,7 @@ std::string Log::IntToString(int value)
 
 void Log::Error(std::string message)
 {
-    Log::Instance()->Print("\nERROR "+ message  + "\n");
+    Log::Instance()->Print("\nERROR : "+ message  + "\n");
 }
 
 std::string Log::GetSDLError()
