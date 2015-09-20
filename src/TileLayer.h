@@ -2,6 +2,7 @@
 #define TILELAYER_H_
 
 #include <vector>
+#include <Tmx.h>
 #include "Layer.h"
 #include "Vector2D.h"
 #include "Level.h"
@@ -11,7 +12,7 @@
 class TileLayer : public Layer
 {
 public:
-    TileLayer(int tileSize, const std::vector<TileSet> &tileSets);
+    TileLayer(int tileSize, const std::vector<Tmx::Tileset*> &tileSets);
 
     virtual void update();
     virtual void render();
@@ -29,7 +30,7 @@ public:
         m_tileSize = tileSize;
     }
 
-    TileSet getTileSetByID(int tileID);
+    Tmx::Tileset* getTileSetByID(int tileID);
 private:
 
     int m_numColumns; //No of columns for game
@@ -41,7 +42,7 @@ private:
     Vector2D m_velocity;
 
     //Tile set data
-    const std::vector<TileSet> &m_tileSets;
+    const std::vector<Tmx::Tileset*> &m_tileSets;
 
     //Tile id data
     std::vector<std::vector<int> > m_tileIDs;

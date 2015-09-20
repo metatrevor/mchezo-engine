@@ -3,7 +3,7 @@
 #include "Log.h"
 
 //Initialize the layer object and set the level tile dimensions
-TileLayer::TileLayer(int tileSize, const std::vector<TileSet> &tileSets) :
+TileLayer::TileLayer(int tileSize, const std::vector<Tmx::Tileset*> &tileSets) :
     m_tileSize(tileSize),
     m_tileSets(tileSets),
     m_position(0,0),
@@ -43,31 +43,35 @@ void TileLayer::render()
                 continue;
             }
 
-            TileSet tileset = getTileSetByID(id);
+            Tmx::Tileset *tileset = getTileSetByID(id);
+
+            if (tileset == nullptr)
+                continue;
 
             id--;
             TextureManager::instance().drawTile(
-                    tileset.name,
-                    tileset.margin,
-                    tileset.spacing,
+                    tileset->GetName(),
+                    tileset->GetMargin(),
+                    tileset->GetSpacing(),
                     (j * m_tileSize) - x2, //The position to draw the tile at x
                     (i * m_tileSize) - y2, //The position to draw the tile at y
                     m_tileSize,
                     m_tileSize,
-                    (id - (tileset.firstgridId - 1)) / tileset.numColumns, //Get location of tile on the worksheet
-                    (id - (tileset.firstgridId - 1)) % tileset.numColumns); //Get location of tile on the worksheet
+                    (id - (tileset->GetFirstGid() - 1)) / (tileset->GetImage()->GetWidth() / (tileset->GetTileWidth() + tileset->GetSpacing())), //Get location of tile on the worksheet
+                    (id - (tileset->GetFirstGid() - 1)) % tileset->GetImage()->GetWidth() / (tileset->GetTileWidth() + tileset->GetSpacing())); //Get location of tile on the worksheet
+            // numcolumns = tileset.GetImage()->GetWidth() / (tileset.GetTileWidth() + tileset.GetSpacing())
         }
     }
 }
 
 //Get the tileset for the tile id
-TileSet TileLayer::getTileSetByID(int tileID)
+Tmx::Tileset* TileLayer::getTileSetByID(int tileID)
 {
     for(int i = 0; i < m_tileSets.size(); i++)
         {
             if( i + 1 <= m_tileSets.size() - 1)
             {
-                if(tileID >= m_tileSets[i].firstgridId && tileID < m_tileSets[i + 1].firstgridId)
+                if(tileID >= m_tileSets[i]->GetFirstGid() && tileID < m_tileSets[i + 1]->GetFirstGid())
                 {
                     return m_tileSets[i];
                 }
@@ -77,7 +81,6 @@ TileSet TileLayer::getTileSetByID(int tileID)
                 return m_tileSets[i];
             }
         }
-    Log::Error("Unable to find tileset, returning an empty tileset");
-    TileSet t;
-    return t;
+    Log::Error("Unable to find tileset, returning a null ptr");
+    return nullptr;
 }
