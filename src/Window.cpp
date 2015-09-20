@@ -17,14 +17,14 @@ Window::Window(std::string windowTitle, int w ,int h)
 
     if(m_window == NULL)
     {
-        Log::Error("Window :" + windowTitle + "could not be created");
+        Log::Error("Window :" + windowTitle + "could not be created" + Log::GetSDLError());
     }
 
     m_renderer = SDL_CreateRenderer(m_window, -1,  SDL_RENDERER_ACCELERATED);
 
     if(m_renderer == NULL)
     {
-        Log::Error("Renderer for :" + windowTitle + " could not be created");
+        Log::Error("Renderer for :" + windowTitle + " could not be created" + Log::GetSDLError());
     }
 
     SDL_SetRenderDrawColor(m_renderer, 0x00, 0x00, 0x00, 0xFF);

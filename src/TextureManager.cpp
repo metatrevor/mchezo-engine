@@ -9,7 +9,8 @@ TextureManager &TextureManager::instance() {
 void TextureManager::init() {
     m_window = new Window("Game window", 640, 480);
     if (!IMG_Init(IMG_INIT_PNG)&IMG_INIT_PNG) {
-        Log::Error("TextureManager : IMG_Init()");
+        Log::Error("TextureManager : IMG_Init()"
+                   + Log::GetSDLError() + Log::GetSDLIMGError());
     }
 }
 
@@ -25,7 +26,8 @@ bool TextureManager::loadTexture(std::string keyName, std::string fileName) {
     SDL_Surface *tempSurface = IMG_Load(fileName.c_str());
 
     if (tempSurface == NULL) {
-        Log::Error("Could not load create surface for " + fileName);
+        Log::Error("Could not load create surface for " + fileName
+                   + Log::GetSDLError() + Log::GetSDLIMGError());
         return false;
     }
     SDL_SetColorKey(tempSurface, SDL_TRUE,
@@ -35,7 +37,8 @@ bool TextureManager::loadTexture(std::string keyName, std::string fileName) {
     SDL_FreeSurface(tempSurface);
 
     if ( newTexture == NULL ) {
-        Log::Error("Could not load create the texture for " + fileName);
+        Log::Error("Could not load create the texture for " + fileName
+                   + Log::GetSDLError() + Log::GetSDLIMGError());
         return false;
     }
 
@@ -122,6 +125,6 @@ void TextureManager::drawTile(std::string id, int margin,
     destRect.y = y;
     if (SDL_RenderCopyEx(m_window->getRenderer(), m_textureMap[id], &srcRect,
             &destRect, 0, 0, SDL_FLIP_NONE) != 0) {
-        Log::Error("SDL_RenderCopyEx for texture " + id);
+        Log::Error("SDL_RenderCopyEx for texture " + id + Log::GetSDLError());
     }
 }
