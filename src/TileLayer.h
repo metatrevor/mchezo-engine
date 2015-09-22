@@ -12,7 +12,7 @@
 class TileLayer : public Layer
 {
 public:
-    TileLayer(int tileSize, const std::vector<Tmx::Tileset*> &tileSets);
+    TileLayer(int tileSize, const Tmx::Map *map, int index);
 
     virtual void update();
     virtual void render();
@@ -30,21 +30,18 @@ public:
         m_tileSize = tileSize;
     }
 
-    Tmx::Tileset* getTileSetByID(int tileID);
+    const Tmx::Tileset* getTileSetByID(int tileID);
 private:
 
-    int m_numColumns; //No of columns for game
-    int m_numRows;  //No of rows for game
     int m_tileSize;
 
     //The vectors are used for map scrolling
     Vector2D m_position;
     Vector2D m_velocity;
 
-    //Tile set data
-    const std::vector<Tmx::Tileset*> &m_tileSets;
-
     //Tile id data
+    int index;
+    const Tmx::Map *m_map;
     std::vector<std::vector<int> > m_tileIDs;
 };
 

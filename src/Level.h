@@ -36,7 +36,8 @@ private:
 
     void parseTileLayer(tinyxml2::XMLElement *tileElement,
                         std::vector<Layer*> *layers,
-                        const std::vector< Tmx::Tileset* > &tileSets);
+                        const std::vector< Tmx::Tileset* > &tileSets,
+                        int index);
     void parseObjectLayer(tinyxml2::XMLElement *objectElement,
                           std::vector<Layer*> *layers);
 

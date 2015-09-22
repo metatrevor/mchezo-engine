@@ -87,6 +87,7 @@ Level *Level::parseLevel(const char *levelFile)
         TextureManager::instance().loadTexture(tileSet->GetName() ,(std::string)"assets/textures/"+tileSet->GetImage()->GetSource());
     }
 
+    int index = 0;
 
     //Parse tile layers
     for (tinyxml2::XMLElement *e = root->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
@@ -96,16 +97,17 @@ Level *Level::parseLevel(const char *levelFile)
                 parseObjectLayer(e, this->getLayers());
             }
             else if(e->FirstChildElement()->Value() == std::string("data")) {
-                parseTileLayer(e, this->getLayers(), m_map->GetTilesets());
+                parseTileLayer(e, this->getLayers(), m_map->GetTilesets(), index);
+                ++index;
             }
         }
     }
 }
 
-void Level::parseTileLayer(tinyxml2::XMLElement *tileElement, std::vector<Layer*>*layers, const std::vector< Tmx::Tileset* > &tileSets)
+void Level::parseTileLayer(tinyxml2::XMLElement *tileElement, std::vector<Layer*>*layers, const std::vector< Tmx::Tileset* > &tileSets, int index)
 {
 
-    TileLayer *tileLayer = new TileLayer(m_tileSize, tileSets);
+    TileLayer *tileLayer = new TileLayer(m_tileSize, m_map, index);
 
     //Multidimesional int array to hold the decoded uncompresssed tile id data
     std::vector<std::vector<int> > data;
