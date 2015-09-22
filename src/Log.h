@@ -12,21 +12,37 @@
 class Log
 {
 public:
-    static Log* Instance();
+    static Log *Instance();
+
     static void Info(std::string message, ...);
+
     static std::string IntToString(int value);
+
     static void Error(std::string message);
+
     static std::string GetSDLError();
+
     static std::string GetSDLIMGError();
+
     static std::string GetSDLTTFError();
+
     static void Destroy();
 
 private:
-    Log(){}
-    ~Log(){Destroy();}
-    Log(Log const&){};
-    Log& operator=(Log const&){};
+    Log()
+    { }
+
+    ~Log()
+    { Destroy(); }
+
+    Log(Log const &)
+    { };
+
+    Log &operator=(Log const &)
+    { };
+
     void Print(std::string message);
+
     static Log *m_instance;
 };
 

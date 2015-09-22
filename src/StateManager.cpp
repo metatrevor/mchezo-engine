@@ -8,50 +8,46 @@ StateMachine &StateMachine::instance()
 }
 
 StateMachine::StateMachine()
-{}
+{ }
 
 StateMachine::~StateMachine()
-{}
+{ }
 
 bool StateMachine::init()
 {
-    if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
-    {
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         Log::Error("Unable to initialize SDL" + Log::GetSDLError());
         return false;
     }
     TextureManager::instance().init();
     instance().change(new MenuState());
-    m_fsm_status= true;
+    m_fsm_status = true;
     return true;
 }
 
-void StateMachine::run(int argc, char** argv)
+void StateMachine::run(int argc, char **argv)
 {
-    if(!init())
-    {
+    if (!init()) {
         Log::Error("Init failure " + Log::GetSDLError());
         exit(EXIT_FAILURE);
     }
 
-    if(m_fsm_status)
-    {
+    if (m_fsm_status) {
         do {
-                frameStart = SDL_GetTicks();
-                m_states.back()->handleEvents();
-                m_states.back()->update();
-                m_states.back()->render();
+            frameStart = SDL_GetTicks();
+            m_states.back()->handleEvents();
+            m_states.back()->update();
+            m_states.back()->render();
 
-                frameTime = SDL_GetTicks() - frameStart;
+            frameTime = SDL_GetTicks() - frameStart;
 
-                if(frameTime < FRAMEDELTA)
-                {
-                    SDL_Delay((int)(FRAMEDELTA - frameTime));
-                }
+            if (frameTime < FRAMEDELTA) {
+                SDL_Delay((int) (FRAMEDELTA - frameTime));
+            }
         }
-         while (m_fsm_status);
-         m_states.back()->exit();
-         m_states.clear();
+        while (m_fsm_status);
+        m_states.back()->exit();
+        m_states.clear();
     }
 
 
@@ -66,12 +62,10 @@ void StateMachine::push(State *state)
 
 void StateMachine::change(State *state)
 {
-    if(!m_states.empty())
-    {
-        if(m_states.back()->getStateName() == state->getStateName())
+    if (!m_states.empty()) {
+        if (m_states.back()->getStateName() == state->getStateName())
             return;
-        else
-        {
+        else {
             m_states.back()->exit();
             delete m_states.back();
             m_states.pop_back();
@@ -84,8 +78,7 @@ void StateMachine::change(State *state)
 
 void StateMachine::pop()
 {
-    if(!m_states.empty())
-    {
+    if (!m_states.empty()) {
         Log::Info("Popping..." + m_states.back()->m_stateName);
         m_states.back()->exit();
         delete m_states.back();

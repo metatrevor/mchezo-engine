@@ -11,14 +11,20 @@ public:
     PauseState();
 
     bool init();
+
     void run();
+
     void render();
+
     void update();
+
     void exit();
+
     void handleEvents();
 
 private:
     static void pauseToGame();
+
     static void pauseToMenu();
 };
 

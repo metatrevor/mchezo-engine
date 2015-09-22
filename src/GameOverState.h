@@ -11,14 +11,20 @@ public:
     GameOverState();
 
     bool init();
+
     void run();
+
     void render();
+
     void update();
+
     void exit();
+
     void handleEvents();
 
 private:
     static void gameOverToMenu();
+
     static void gameOverToRestartGame();
 };
 

@@ -1,13 +1,14 @@
 #include "Network.h"
+
 #define DEBUG 1
 
-char m_board[3][3] = { {' ', ' ', ' '}, /* Game board */
-                     {' ', ' ', ' '},
-                     {' ', ' ', ' '} };
+char m_board[3][3] = {{' ', ' ', ' '}, /* Game board */
+                      {' ', ' ', ' '},
+                      {' ', ' ', ' '}};
 
 
 CNetwork::CNetwork(std::string server_hostname, int server_port)
-    :m_server_host(server_hostname), m_server_port(server_port), m_game_status(false)
+        : m_server_host(server_hostname), m_server_port(server_port), m_game_status(false)
 {
 }
 
@@ -27,7 +28,7 @@ void CNetwork::Error(const char *msg)
  */
 
 /* Reads a message from the serve196.201.229.49   r socket. */
-void CNetwork::ReceiveMsg(int m_sockfd, char * msg)
+void CNetwork::ReceiveMsg(int m_sockfd, char *msg)
 {
     /* All messages are 3 bytes. */
     memset(msg, 0, 4);
@@ -91,7 +92,7 @@ int CNetwork::ConnectToServer()
     m_server_hptr = gethostbyname(m_server_host.c_str());
 
     if (m_server_hptr == NULL) {
-        fprintf(stderr,"ERROR, no such host\n");
+        fprintf(stderr, "ERROR, no such host\n");
         exit(0);
     }
 
@@ -137,7 +138,7 @@ void CNetwork::TakeTurn(int m_sockfd)
         printf("Enter 0-8 to make a move, or 9 for number of active players: ");
         fgets(buffer, 10, stdin);
         int move = buffer[0] - '0';
-        if (move <= 9 && move >= 0){
+        if (move <= 9 && move >= 0) {
             printf("\n");
             /* Send players move to the server. */
             WriteServerInt(m_sockfd, move);
@@ -156,7 +157,7 @@ void CNetwork::GetUpdateFromServer(int m_sockfd, char board[][3])
     int move = ReceiveInt(m_sockfd);
 
     /* Update the game board. */
-    board[move/3][move%3] = player_id ? 'X' : 'O';
+    board[move / 3][move % 3] = player_id ? 'X' : 'O';
 }
 
 void CNetwork::PostUpdateFromClient(int move)
@@ -187,12 +188,12 @@ int CNetwork::Init()
      * Wait for the game to start.
      */
 
-        ReceiveMsg(m_sockfd, m_msg);
-        Log::Info(m_msg);
-        Log::Info("strcmp value");
-        Log::Info(Log::IntToString( strcmp(m_msg, "SRT") ));
-        if (strcmp(m_msg, "HLD") == 0) //The server is waiting on a second client
-            printf("Waiting for a second player...\n");
+    ReceiveMsg(m_sockfd, m_msg);
+    Log::Info(m_msg);
+    Log::Info("strcmp value");
+    Log::Info(Log::IntToString(strcmp(m_msg, "SRT")));
+    if (strcmp(m_msg, "HLD") == 0) //The server is waiting on a second client
+        printf("Waiting for a second player...\n");
 
     /* The game has begun. */
     printf("Game on!\n");
@@ -202,43 +203,45 @@ int CNetwork::Init()
 
 void CNetwork::NetworkLoop()
 {
-    if(m_game_status == false)
+    if (m_game_status == false)
         Init();
 
-        ReceiveMsg(m_sockfd, m_msg);
+    ReceiveMsg(m_sockfd, m_msg);
 
-        if (!strcmp(m_msg, "TRN")) { /* Take a turn. */
-            printf("Your move...\n");
-            TakeTurn(m_sockfd);
-        }
-        else if (!strcmp(m_msg, "INV")) { /* Move was invalid. Note that a "TRN" message will always follow an "INV" message, so we will end up at the above case in the next iteration. */
-            printf("That position has already been played. Try again.\n");
-        }
-        else if (!strcmp(m_msg, "CNT")) { /* Server is sending the number of active players. Note that a "TRN" message will always follow a "CNT" message. */
-            int num_players = ReceiveInt(m_sockfd);
-            printf("There are currently %d active players.\n", num_players);
-        }
-        else if (!strcmp(m_msg, "UPD")) { /* Server is sending a game board update. */
-            GetUpdateFromServer(m_sockfd, m_board);
-            DrawBoard(m_board);
-        }
-        else if (!strcmp(m_msg, "WAT")) { /* Wait for other player to take a turn. */
-            printf("Waiting for other players move...\n");
-        }
-        else if (!strcmp(m_msg, "WIN")) { /* Winner. */
-            printf("You win!\n");
-            CleanUp();
-        }
-        else if (!strcmp(m_msg, "LSE")) { /* Loser. */
-            printf("You lost.\n");
-            CleanUp();
-        }
-        else if (!strcmp(m_msg, "DRW")) { /* Game is a draw. */
-            printf("Draw.\n");
-            CleanUp();
-        }
-        else /* Weird... */
-            Error("Unknown message.");
+    if (!strcmp(m_msg, "TRN")) { /* Take a turn. */
+        printf("Your move...\n");
+        TakeTurn(m_sockfd);
+    }
+    else if (!strcmp(m_msg,
+                     "INV")) { /* Move was invalid. Note that a "TRN" message will always follow an "INV" message, so we will end up at the above case in the next iteration. */
+        printf("That position has already been played. Try again.\n");
+    }
+    else if (!strcmp(m_msg,
+                     "CNT")) { /* Server is sending the number of active players. Note that a "TRN" message will always follow a "CNT" message. */
+        int num_players = ReceiveInt(m_sockfd);
+        printf("There are currently %d active players.\n", num_players);
+    }
+    else if (!strcmp(m_msg, "UPD")) { /* Server is sending a game board update. */
+        GetUpdateFromServer(m_sockfd, m_board);
+        DrawBoard(m_board);
+    }
+    else if (!strcmp(m_msg, "WAT")) { /* Wait for other player to take a turn. */
+        printf("Waiting for other players move...\n");
+    }
+    else if (!strcmp(m_msg, "WIN")) { /* Winner. */
+        printf("You win!\n");
+        CleanUp();
+    }
+    else if (!strcmp(m_msg, "LSE")) { /* Loser. */
+        printf("You lost.\n");
+        CleanUp();
+    }
+    else if (!strcmp(m_msg, "DRW")) { /* Game is a draw. */
+        printf("Draw.\n");
+        CleanUp();
+    }
+    else /* Weird... */
+        Error("Unknown message.");
 }
 
 

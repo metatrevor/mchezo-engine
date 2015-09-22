@@ -19,20 +19,27 @@ class SoundManager
 public:
 
     static SoundManager &instance();
+
     bool loadSound(std::string keyName, std::string fileName, audio_type type);
 
     void playSound(std::string keyName, int loop);
+
     void playMusic(std::string keyName, int loop);
 
 
 private:
     SoundManager();
-    ~SoundManager();
-    SoundManager(const SoundManager&){}
-    SoundManager & operator=(const SoundManager&){}
 
-    std::map<std::string, Mix_Chunk*> m_soundbuffers;
-    std::map<std::string, Mix_Music*> m_musicbuffers;
+    ~SoundManager();
+
+    SoundManager(const SoundManager &)
+    { }
+
+    SoundManager &operator=(const SoundManager &)
+    { }
+
+    std::map<std::string, Mix_Chunk *> m_soundbuffers;
+    std::map<std::string, Mix_Music *> m_musicbuffers;
 };
 
 #endif //SOUNDMANAGER_H_

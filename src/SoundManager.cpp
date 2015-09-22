@@ -10,17 +10,18 @@ SoundManager::~SoundManager()
 {
     Mix_CloseAudio();
 }
+
 SoundManager &SoundManager::instance()
 {
     static SoundManager m_instance;
     return m_instance;
 }
 
-bool SoundManager::loadSound(std::string keyName, std::string fileName, audio_type type) {
-    if(type == SOUND_SFX)
-    {
+bool SoundManager::loadSound(std::string keyName, std::string fileName, audio_type type)
+{
+    if (type == SOUND_SFX) {
         Mix_Chunk *chunk = Mix_LoadWAV(fileName.c_str());
-        if(chunk == 0) {
+        if (chunk == 0) {
             Log::Error("Failed to load SFX :  " + fileName);
             Log::Error(Mix_GetError());
             return false;
@@ -31,10 +32,9 @@ bool SoundManager::loadSound(std::string keyName, std::string fileName, audio_ty
         }
     }
 
-    else if(type == SOUND_MUSIC)
-    {
+    else if (type == SOUND_MUSIC) {
         Mix_Music *chunk = Mix_LoadMUS(fileName.c_str());
-        if(chunk == 0) {
+        if (chunk == 0) {
             Log::Error("Failed to load Music :  " + fileName);
             Log::Error(Mix_GetError());
             return false;
@@ -52,10 +52,12 @@ bool SoundManager::loadSound(std::string keyName, std::string fileName, audio_ty
 
 }
 
-void SoundManager::playSound(std::string keyName, int loop) {
+void SoundManager::playSound(std::string keyName, int loop)
+{
     Mix_PlayChannel(-1, m_soundbuffers[keyName], loop);
 }
 
-void SoundManager::playMusic(std::string keyName, int loop) {
+void SoundManager::playMusic(std::string keyName, int loop)
+{
     Mix_PlayMusic(m_musicbuffers[keyName], loop);
 }

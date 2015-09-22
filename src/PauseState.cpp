@@ -28,9 +28,8 @@ void PauseState::run()
 void PauseState::render()
 {
     TextureManager::instance().getWindow()->clearRenderer();
-    std::vector<Object*>::size_type i;
-    for(i = 0; i < m_objects.size(); i++)
-    {
+    std::vector<Object *>::size_type i;
+    for (i = 0; i < m_objects.size(); i++) {
         m_objects[i]->draw();
     }
     TextureManager::instance().getWindow()->updateWindow();
@@ -38,9 +37,8 @@ void PauseState::render()
 
 void PauseState::update()
 {
-    std::vector<Object*>::size_type i;
-    for(i = 0; i < m_objects.size(); i++)
-    {
+    std::vector<Object *>::size_type i;
+    for (i = 0; i < m_objects.size(); i++) {
         m_objects[i]->update();
     }
 }

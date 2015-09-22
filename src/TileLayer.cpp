@@ -1,15 +1,14 @@
 #include "TileLayer.h"
 #include "TextureManager.h"
-#include "Log.h"
 
 //Initialize the layer object and set the level tile dimensions
 TileLayer::TileLayer(int tileSize, const Tmx::Map *map, int index) :
-    m_tileSize(tileSize),
-    m_position(0,0),
-    m_velocity(0,0),
-    index(index),
-    m_map(map)
-{}
+        m_tileSize(tileSize),
+        m_position(0, 0),
+        m_velocity(0, 0),
+        index(index),
+        m_map(map)
+{ }
 
 void TileLayer::update()
 {
@@ -23,8 +22,8 @@ void TileLayer::render()
 {
     int x, y, x2, y2 = 0;
 
-    x = int(m_position.getX())/m_tileSize;
-    y = int(m_position.getY())/m_tileSize;
+    x = int(m_position.getX()) / m_tileSize;
+    y = int(m_position.getY()) / m_tileSize;
 
     x2 = int(m_position.getX()) % m_tileSize;
     y2 = int(m_position.getY()) % m_tileSize;
@@ -33,11 +32,10 @@ void TileLayer::render()
         for (int j = 0; j < m_map->GetLayer(index)->GetWidth(); ++j) {
 
             //Get the tile ID
-            int id = m_tileIDs[i+y][j+x];
+            int id = m_tileIDs[i + y][j + x];
 
             //Do not render null tile id's
-            if(id==0)
-            {
+            if (id == 0) {
                 continue;
             }
 
@@ -55,30 +53,28 @@ void TileLayer::render()
                     (i * m_tileSize) - y2, //The position to draw the tile at y
                     m_tileSize,
                     m_tileSize,
-                    (id - (tileset->GetFirstGid() - 1)) / (tileset->GetImage()->GetWidth() / (tileset->GetTileWidth() + tileset->GetSpacing())), //Get location of tile on the worksheet
-                    (id - (tileset->GetFirstGid() - 1)) % tileset->GetImage()->GetHeight() / (tileset->GetTileHeight() + tileset->GetSpacing())); //Get location of tile on the worksheet
-                    // numcolumns = tileset.GetImage()->GetWidth() / (tileset.GetTileWidth() + tileset.GetSpacing())
+                    (id - (tileset->GetFirstGid() - 1)) / (tileset->GetImage()->GetWidth() / (tileset->GetTileWidth() +
+                                                                                              tileset->GetSpacing())), //Get location of tile on the worksheet
+                    (id - (tileset->GetFirstGid() - 1)) % tileset->GetImage()->GetHeight() /
+                    (tileset->GetTileHeight() + tileset->GetSpacing())); //Get location of tile on the worksheet
+            // numcolumns = tileset.GetImage()->GetWidth() / (tileset.GetTileWidth() + tileset.GetSpacing())
         }
     }
 }
 
 //Get the tileset for the tile id
-const Tmx::Tileset* TileLayer::getTileSetByID(int tileID)
+const Tmx::Tileset *TileLayer::getTileSetByID(int tileID)
 {
-    for(int i = 0; i < m_map->GetNumTilesets(); i++)
-        {
-            if( i + 1 <= m_map->GetNumTilesets() - 1)
-            {
-                if(tileID >= m_map->GetTileset(i)->GetFirstGid() && tileID < m_map->GetTileset(i + 1)->GetFirstGid())
-                {
-                    return m_map->GetTileset(i);
-                }
-            }
-            else
-            {
+    for (int i = 0; i < m_map->GetNumTilesets(); i++) {
+        if (i + 1 <= m_map->GetNumTilesets() - 1) {
+            if (tileID >= m_map->GetTileset(i)->GetFirstGid() && tileID < m_map->GetTileset(i + 1)->GetFirstGid()) {
                 return m_map->GetTileset(i);
             }
         }
+        else {
+            return m_map->GetTileset(i);
+        }
+    }
     Log::Error("Unable to find tileset, returning a null ptr");
     return nullptr;
 }

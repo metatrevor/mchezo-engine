@@ -13,7 +13,7 @@ Uint32 Timer::GetMilliSecondsDelta()
 
 Uint32 Timer::GetSecondsDelta()
 {
-   return GetMilliSecondsDelta()/1000;
+    return GetMilliSecondsDelta() / 1000;
 }
 
 void Timer::Reset()

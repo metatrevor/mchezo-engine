@@ -10,19 +10,27 @@ class StateMachine
 {
 public:
     static StateMachine &instance();
+
     bool init();
+
     void run(int argc, char **argv);
+
     void push(State *state);
+
     void change(State *state);
+
     void pop();
 
     void quitGame();
 
 private:
-    std::vector <State*> m_states;
+    std::vector<State *> m_states;
+
     StateMachine();
+
     ~StateMachine();
-    State* m_currentState;
+
+    State *m_currentState;
     Uint32 frameStart;
     Uint32 frameTime;
     bool m_fsm_status;

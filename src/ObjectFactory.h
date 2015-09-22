@@ -10,16 +10,20 @@ class BaseObjectCreator
 {
 public:
     virtual Object *createObject() const = 0;
-    virtual ~BaseObjectCreator() {}
+
+    virtual ~BaseObjectCreator()
+    { }
 };
 
 class ObjectFactory
 {
 public:
     bool registerObjectType(std::string objectType, BaseObjectCreator *creator);
+
     Object *create(std::string objectType);
+
 private:
-    std::map<std::string, BaseObjectCreator*> m_objectTemplates;
+    std::map<std::string, BaseObjectCreator *> m_objectTemplates;
 };
 
 #endif // OBJECTFACTORY_H

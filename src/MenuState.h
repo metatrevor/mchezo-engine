@@ -12,14 +12,20 @@ public:
     MenuState();
 
     bool init();
+
     void run();
+
     void render();
+
     void update();
+
     void exit();
+
     void handleEvents();
 
 private:
     static void menuToGame();
+
     static void menuToQuit();
 };
 

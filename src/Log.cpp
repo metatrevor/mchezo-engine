@@ -1,11 +1,10 @@
 #include "Log.h"
 
-Log* Log::m_instance = NULL;
+Log *Log::m_instance = NULL;
 
-Log* Log::Instance()
+Log *Log::Instance()
 {
-    if(!m_instance)
-    {
+    if (!m_instance) {
         m_instance = new Log();
     }
 
@@ -25,7 +24,7 @@ void Log::Print(std::string message)
 
 void Log::Info(std::string message, ...)
 {
-    Log::Instance()->Print("\nINFO : "+ message + "\n");
+    Log::Instance()->Print("\nINFO : " + message + "\n");
 }
 
 std::string Log::IntToString(int value)
@@ -37,7 +36,7 @@ std::string Log::IntToString(int value)
 
 void Log::Error(std::string message)
 {
-    Log::Instance()->Print("\nERROR : "+ message  + "\n");
+    Log::Instance()->Print("\nERROR : " + message + "\n");
 }
 
 std::string Log::GetSDLError()
@@ -46,23 +45,22 @@ std::string Log::GetSDLError()
 
     const char *sdl_error = SDL_GetError();
 
-    if(strlen(sdl_error) != 0)
-    {
-         message += "\nSDL_Exception: ";
-         message += sdl_error;
+    if (strlen(sdl_error) != 0) {
+        message += "\nSDL_Exception: ";
+        message += sdl_error;
     }
 
     return message;
 }
 
-std::string Log::GetSDLIMGError() {
+std::string Log::GetSDLIMGError()
+{
 
     std::string message;
 
     const char *img_error = TTF_GetError();
 
-    if( strlen(img_error) != 0 )
-    {
+    if (strlen(img_error) != 0) {
         message += "\nIMG_Exception: ";
         message += img_error;
     }
@@ -70,14 +68,14 @@ std::string Log::GetSDLIMGError() {
     return message;
 }
 
-std::string Log::GetSDLTTFError() {
+std::string Log::GetSDLTTFError()
+{
 
     std::string message;
 
-    const char * ttf_error = TTF_GetError();
+    const char *ttf_error = TTF_GetError();
 
-    if( strlen(ttf_error) != 0 )
-    {
+    if (strlen(ttf_error) != 0) {
         message += "\nTTF_Exception: ";
         message += ttf_error;
     }

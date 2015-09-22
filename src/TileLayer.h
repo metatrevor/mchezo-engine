@@ -15,9 +15,11 @@ public:
     TileLayer(int tileSize, const Tmx::Map *map, int index);
 
     virtual void update();
+
     virtual void render();
 
-    virtual ~TileLayer(){}
+    virtual ~TileLayer()
+    { }
 
     //Set the tile ids after parsing the layer data
     void setTileIDs(const std::vector<std::vector<int> > &data)
@@ -30,7 +32,8 @@ public:
         m_tileSize = tileSize;
     }
 
-    const Tmx::Tileset* getTileSetByID(int tileID);
+    const Tmx::Tileset *getTileSetByID(int tileID);
+
 private:
 
     int m_tileSize;

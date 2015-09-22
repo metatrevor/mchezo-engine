@@ -31,9 +31,8 @@ void GameOverState::run()
 void GameOverState::render()
 {
     TextureManager::instance().getWindow()->clearRenderer();
-    std::vector<Object*>::size_type i;
-    for(i = 0; i < m_objects.size(); i++)
-    {
+    std::vector<Object *>::size_type i;
+    for (i = 0; i < m_objects.size(); i++) {
         m_objects[i]->draw();
     }
     TextureManager::instance().getWindow()->updateWindow();
@@ -41,9 +40,8 @@ void GameOverState::render()
 
 void GameOverState::update()
 {
-    std::vector<Object*>::size_type i;
-    for(i = 0; i < m_objects.size(); i++)
-    {
+    std::vector<Object *>::size_type i;
+    for (i = 0; i < m_objects.size(); i++) {
         m_objects[i]->update();
     }
 }

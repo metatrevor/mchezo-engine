@@ -10,12 +10,19 @@ class WinState
 
 public:
     WinState(Graphics *graphics, StateManager *stateManager);
+
     bool Run();
+
     void HandleInput();
+
     void OnQuit();
+
     void Pause();
+
     void OnKeyDown(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode);
+
     void LoadResources();
+
     void getWinner(int winner);
 
     SDL_Surface *m_grid_o_wins;

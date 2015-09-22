@@ -22,7 +22,7 @@ void State::render()
 
 void State::update()
 {
-    std::vector<Object*>::size_type i;
+    std::vector<Object *>::size_type i;
     for (i = 0; i < m_objects.size(); i++) {
         m_objects[i]->update();
     }
@@ -37,9 +37,8 @@ void State::handleEvents()
 
 void State::exit()
 {
-    std::vector<Object*>::size_type i;
-    for(i = 0; i < m_objects.size(); i++)
-    {
+    std::vector<Object *>::size_type i;
+    for (i = 0; i < m_objects.size(); i++) {
         m_objects[i]->clean();
     }
     m_objects.clear();
