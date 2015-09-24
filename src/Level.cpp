@@ -2,7 +2,6 @@
 #include "TextureManager.h"
 #include "zlib.h"
 #include "TileLayer.h"
-#include "common/base64/base64.h"
 #include "ObjectLayer.h"
 
 
@@ -14,16 +13,14 @@ Level::~Level()
 
 void Level::render()
 {
-    std::vector<Layer *>::size_type i;
-    for (i = 0; i < m_layers.size(); ++i) {
+    for (int i = 0; i < m_map->GetNumLayers(); ++i) {
         m_layers[i]->render();
     }
 }
 
 void Level::update()
 {
-    std::vector<Layer *>::size_type i;
-    for (i = 0; i < m_layers.size(); ++i) {
+    for (int i = 0; i < m_map->GetNumLayers(); ++i) {
         m_layers[i]->update();
     }
 }
@@ -69,11 +66,6 @@ Level *Level::parseLevel(const char *levelFile)
     //Load root node
     tinyxml2::XMLElement *root = levelDocument.RootElement();
 
-    //Load map info
-    m_tileSize = m_map->GetTileWidth();
-    m_width_columns = m_map->GetWidth();
-    m_height_rows = m_map->GetHeight();
-
     //Parse the tilesets
 
     for (int i = 0; i < m_map->GetNumTilesets(); ++i) {
@@ -84,7 +76,12 @@ Level *Level::parseLevel(const char *levelFile)
                                                (std::string) "assets/textures/" + tileSet->GetImage()->GetSource());
     }
 
-    int index = 0;
+    // Create internal layers for the map
+
+    for (int i = 0; i < m_map->GetNumLayers(); ++i) {
+        TileLayer *tileLayer = new TileLayer(m_map, i);
+        m_layers.push_back(tileLayer);
+    }
 
     //Parse tile layers
     for (tinyxml2::XMLElement *e = root->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
@@ -93,68 +90,9 @@ Level *Level::parseLevel(const char *levelFile)
             if (e->FirstChildElement()->Value() == std::string("object")) {
                 parseObjectLayer(e, this->getLayers());
             }
-            else if (e->FirstChildElement()->Value() == std::string("data")) {
-                parseTileLayer(e, this->getLayers(), m_map->GetTilesets(), index);
-                ++index;
-            }
         }
     }
 }
-
-void Level::parseTileLayer(tinyxml2::XMLElement *tileElement, std::vector<Layer *> *layers,
-                           const std::vector<Tmx::Tileset *> &tileSets, int index)
-{
-
-    TileLayer *tileLayer = new TileLayer(m_tileSize, m_map, index);
-
-    //Multidimesional int array to hold the decoded uncompresssed tile id data
-    std::vector<std::vector<int> > data;
-    //Stores the decoded base64 string
-    std::string decodedIDs;
-    //Stores the layer data node
-    tinyxml2::XMLElement *dataNode;
-
-    //Find the layer data node
-    for (tinyxml2::XMLElement *e = tileElement->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
-        if (e->Value() == std::string("data")) {
-            dataNode = e;
-        }
-    }
-
-    //Get the compressed base64 string and decode it
-    //TODO: eliminate the loop below
-    for (tinyxml2::XMLNode *e = dataNode->FirstChild(); e != NULL; e = e->NextSibling()) {
-        tinyxml2::XMLText *text = e->ToText();
-        std::string t = tinyxml2::XMLUtil::SkipWhiteSpace(text->ToText()->Value());
-        decodedIDs = base64_decode(t);
-    }
-
-    //Get the size the memory size for the ids
-    uLongf sizeOfIds = m_width_columns * m_height_rows * sizeof(int);
-    //Get the number of tile id's
-    std::vector<int> ids(m_width_columns * m_height_rows);
-    //Do the actual zlib decompression
-    uncompress((Bytef *) &ids[0], &sizeOfIds, (const Bytef *) decodedIDs.c_str(), decodedIDs.size());
-
-    //Create empty layer row arrays and insert them to the main data array
-    std::vector<int> layerRow(m_width_columns);
-    for (int j = 0; j < m_height_rows; j++) {
-        data.push_back(layerRow);
-    }
-
-    //Fill the data array with the tile ids
-    for (int rows = 0; rows < m_height_rows; ++rows) {
-        for (int columns = 0; columns < m_width_columns; ++columns) {
-            data[rows][columns] = ids[rows * m_width_columns + columns];
-        }
-    }
-    //Set the loaded tile data ids to the tilelayer
-    tileLayer->setTileIDs(data);
-
-    //Add the tilelayer to the level
-    layers->push_back(tileLayer);
-}
-
 
 //Parse object layers
 void Level::parseObjectLayer(tinyxml2::XMLElement *objectElement, std::vector<Layer *> *layers)

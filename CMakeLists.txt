@@ -58,8 +58,6 @@ set(SOURCE_FILES
     src/Window.h
     src/WinState.h
     #Common library
-    src/common/base64/base64.h
-    src/common/base64/base64.cpp
     )
 
 add_executable(Mchezo-engine ${SOURCE_FILES})

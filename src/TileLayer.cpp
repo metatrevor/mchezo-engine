@@ -2,8 +2,7 @@
 #include "TextureManager.h"
 
 //Initialize the layer object and set the level tile dimensions
-TileLayer::TileLayer(int tileSize, const Tmx::Map *map, int index) :
-        m_tileSize(tileSize),
+TileLayer::TileLayer(const Tmx::Map *map, int index) :
         m_position(0, 0),
         m_velocity(0, 0),
         index(index),
@@ -22,18 +21,17 @@ void TileLayer::render()
 {
     int x, y, x2, y2 = 0;
 
-    x = int(m_position.getX()) / m_tileSize;
-    y = int(m_position.getY()) / m_tileSize;
+    x = int(m_position.getX()) / m_map->GetTileWidth();
+    y = int(m_position.getY()) / m_map->GetTileWidth();;
 
-    x2 = int(m_position.getX()) % m_tileSize;
-    y2 = int(m_position.getY()) % m_tileSize;
+    x2 = int(m_position.getX()) % m_map->GetTileWidth();;
+    y2 = int(m_position.getY()) % m_map->GetTileWidth();;
 
     for (int i = 0; i < m_map->GetLayer(index)->GetHeight(); ++i) {
         for (int j = 0; j < m_map->GetLayer(index)->GetWidth(); ++j) {
 
             //Get the tile ID
-            int id = m_tileIDs[i + y][j + x];
-
+            int id = m_map->GetTileLayer(index)->GetTileGid(i + y, j + x);
             //Do not render null tile id's
             if (id == 0) {
                 continue;
@@ -49,10 +47,10 @@ void TileLayer::render()
                     tileset->GetName(),
                     tileset->GetMargin(),
                     tileset->GetSpacing(),
-                    (j * m_tileSize) - x2, //The position to draw the tile at x
-                    (i * m_tileSize) - y2, //The position to draw the tile at y
-                    m_tileSize,
-                    m_tileSize,
+                    (j * m_map->GetTileWidth()) - x2, //The position to draw the tile at x
+                    (i * m_map->GetTileWidth()) - y2, //The position to draw the tile at y
+                    m_map->GetTileWidth(),
+                    m_map->GetTileWidth(),
                     (id - (tileset->GetFirstGid() - 1)) / (tileset->GetImage()->GetWidth() / (tileset->GetTileWidth() +
                                                                                               tileset->GetSpacing())), //Get location of tile on the worksheet
                     (id - (tileset->GetFirstGid() - 1)) % tileset->GetImage()->GetHeight() /

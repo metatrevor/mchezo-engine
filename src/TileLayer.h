@@ -12,7 +12,7 @@
 class TileLayer : public Layer
 {
 public:
-    TileLayer(int tileSize, const Tmx::Map *map, int index);
+    TileLayer(const Tmx::Map *map, int index);
 
     virtual void update();
 
@@ -21,22 +21,9 @@ public:
     virtual ~TileLayer()
     { }
 
-    //Set the tile ids after parsing the layer data
-    void setTileIDs(const std::vector<std::vector<int> > &data)
-    {
-        m_tileIDs = data;
-    }
-
-    void setTileSize(int tileSize)
-    {
-        m_tileSize = tileSize;
-    }
-
     const Tmx::Tileset *getTileSetByID(int tileID);
 
 private:
-
-    int m_tileSize;
 
     //The vectors are used for map scrolling
     Vector2D m_position;
@@ -44,8 +31,8 @@ private:
 
     //Tile id data
     int index;
+    //The map ptr
     const Tmx::Map *m_map;
-    std::vector<std::vector<int> > m_tileIDs;
 };
 
 #endif
