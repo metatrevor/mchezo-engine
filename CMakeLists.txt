@@ -30,12 +30,6 @@ set(SOURCE_FILES
     src/Network.h
     src/Object.cpp
     src/Object.h
-    src/ObjectFactory.h
-    src/ObjectFactory.cpp
-    src/ObjectLayer.h
-    src/ObjectLayer.cpp
-    src/ObjectParams.cpp
-    src/ObjectParams.h
     src/PauseState.cpp
     src/PauseState.h
     src/Player.cpp
@@ -61,7 +55,6 @@ set(SOURCE_FILES
     )
 
 add_executable(Mchezo-engine ${SOURCE_FILES})
-find_package (ZLIB)
 
 
 include (cmake/FindTinyXML2.cmake)
@@ -78,11 +71,9 @@ PKG_SEARCH_MODULE(TINYXML2 REQUIRED tinyxml2)
 PKG_SEARCH_MODULE(TMXPARSER REQUIRED tmx-parser)
 
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS}
-                    ${SDL2_TTF_INCLUDE_DIRS} ${ZLIB_INCLUDE_DIRS}
-                    ${TINYXML2_INCLUDE_DIR} ${SDL2_Mixer_INCLUDE_DIRS}
+                    ${SDL2_TTF_INCLUDE_DIRS} ${TINYXML2_INCLUDE_DIR} ${SDL2_Mixer_INCLUDE_DIRS}
                     ${TMXPARSER_INCLUDE_DIR})
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARIES}
                       ${SDL2IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES}
-                      ${ZLIB_LIBRARIES} ${TINYXML2_LIBRARY}
-                      ${SDLMIXER_LIBRARY} ${TMXPARSER_LIBRARY})
+                      ${TINYXML2_LIBRARY} ${SDLMIXER_LIBRARY} ${TMXPARSER_LIBRARY})

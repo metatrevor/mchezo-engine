@@ -35,9 +35,6 @@ public:
 private:
     std::vector<Layer *> m_layers;
 
-    void parseObjectLayer(tinyxml2::XMLElement *objectElement,
-                          std::vector<Layer *> *layers);
-
     Tmx::Map *m_map;
 };
 

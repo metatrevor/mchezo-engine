@@ -3,7 +3,6 @@
 
 #include <string>
 #include "TextureManager.h"
-#include "ObjectParams.h"
 #include "Vector2D.h"
 
 class Object
@@ -11,7 +10,6 @@ class Object
 public:
     Object(int x, int y, int width, int height, std::string textureName);
 
-    Object(ObjectParams *params);
 
     virtual void draw() = 0;
 
