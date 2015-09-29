@@ -26,8 +26,6 @@ set(SOURCE_FILES
     src/MenuButton.h
     src/MenuState.cpp
     src/MenuState.h
-    src/Network.cpp
-    src/Network.h
     src/Object.cpp
     src/Object.h
     src/PauseState.cpp

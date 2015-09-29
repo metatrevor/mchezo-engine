@@ -10,10 +10,6 @@ bool MenuState::init()
 {
     m_stateName = "MENU";
     Log::Info("Entering Menustate...");
-    TextureManager::instance().loadTexture("play", "assets/textures/button.png");
-    TextureManager::instance().loadTexture("exit", "assets/textures/exit.png");
-    m_objects.push_back(new MenuButton(100, 100, 400, 100, "play", menuToGame));
-    m_objects.push_back(new MenuButton(100, 300, 400, 100, "exit", menuToQuit));
     return true;
 }
 

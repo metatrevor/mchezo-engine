@@ -2,10 +2,7 @@
 
 Enemy::Enemy(int x, int y, int height, int width, std::string textureKeyName)
         : Object(x, y, height, width, textureKeyName)
-{
-    m_velocity.setY(2);
-    m_velocity.setX(0.001);
-}
+{}
 
 
 void Enemy::draw()

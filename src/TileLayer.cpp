@@ -55,7 +55,7 @@ void TileLayer::render()
                                                                                               tileset->GetSpacing())), //Get location of tile on the worksheet
                     (id - (tileset->GetFirstGid() - 1)) % tileset->GetImage()->GetHeight() /
                     (tileset->GetTileHeight() + tileset->GetSpacing())); //Get location of tile on the worksheet
-            // numcolumns = tileset.GetImage()->GetWidth() / (tileset.GetTileWidth() + tileset.GetSpacing())
+                    // numcolumns = tileset.GetImage()->GetWidth() / (tileset.GetTileWidth() + tileset.GetSpacing())
         }
     }
 }

@@ -12,12 +12,6 @@ bool GameOverState::init()
 {
     m_stateName = "GAMEOVER";
     Log::Info("Entering GameOverState...");
-    TextureManager::instance().loadTexture("gameovertext", "assets/textures/gameover.png");
-    TextureManager::instance().loadTexture("restart", "assets/textures/restart.png");
-    TextureManager::instance().loadTexture("main_menu", "assets/textures/main_menu.png");
-    m_objects.push_back(new AnimatedGraphic(200, 100, 190, 30, "gameovertext", 2));
-    m_objects.push_back(new MenuButton(200, 200, 200, 80, "main_menu", gameOverToMenu));
-    m_objects.push_back(new MenuButton(200, 300, 200, 80, "restart", gameOverToRestartGame));
     return true;
 }
 
@@ -49,9 +43,6 @@ void GameOverState::update()
 void GameOverState::exit()
 {
     State::exit();
-    TextureManager::instance().deleteTexture("main_menu");
-    TextureManager::instance().deleteTexture("restart");
-    TextureManager::instance().deleteTexture("gameover");
     Log::Info("Exiting GameOverState...\n");
 }
 

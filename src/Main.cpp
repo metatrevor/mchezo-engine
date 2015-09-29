@@ -2,6 +2,6 @@
 
 int main(int argc, char *argv[])
 {
-    StateManager::instance().run(argc, argv);
+    //Import the statemanager and run
     return 0;
 }

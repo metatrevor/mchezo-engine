@@ -2,10 +2,7 @@
 
 AnimatedGraphic::AnimatedGraphic(int x, int y, int height, int width, std::string textureKeyName, int animationSpeed)
         : Object(x, y, height, width, textureKeyName), m_animationSpeed(animationSpeed)
-{
-    m_velocity.setY(2);
-    m_velocity.setX(0.001);
-}
+{}
 
 
 void AnimatedGraphic::draw()
