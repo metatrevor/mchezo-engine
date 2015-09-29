@@ -33,6 +33,7 @@ https://github.com/andrewrk/tmxparser.git
 * Basic States such as pause games
 * Timer
 * Window Manager
+* Basic Game Object
 
 ## RoadMap
 
