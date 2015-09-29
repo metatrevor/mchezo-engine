@@ -10,7 +10,7 @@ The project in actual sense is not a true a game engine but rather a personal fr
 simulations and exploring the mechanics used in developing classical games.
 
 #Dependencies for building the project:
-The project in itself compiles but is not executable as it only provides a basic 
+The project itself compiles but is not executable as it only provides a basic 
 framework for the development of games.
 
 * sdl2
