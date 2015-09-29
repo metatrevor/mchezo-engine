@@ -47,12 +47,12 @@ void MenuState::handleEvents()
 void MenuState::menuToGame()
 {
     Log::Info("Menu to Game clicked");
-    StateMachine::instance().push(new Game());
+    StateManager::instance().push(new Game());
 }
 
 void MenuState::menuToQuit()
 {
     Log::Info("Menu to Quit clicked");
-    StateMachine::instance().pop();
-    StateMachine::instance().quitGame();
+    StateManager::instance().pop();
+    StateManager::instance().quitGame();
 }

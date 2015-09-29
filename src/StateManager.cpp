@@ -1,19 +1,19 @@
 #include "StateManager.h"
 #include "MenuState.h"
 
-StateMachine &StateMachine::instance()
+StateManager &StateManager::instance()
 {
-    static StateMachine m_instance;
+    static StateManager m_instance;
     return m_instance;
 }
 
-StateMachine::StateMachine()
+StateManager::StateManager()
 { }
 
-StateMachine::~StateMachine()
+StateManager::~StateManager()
 { }
 
-bool StateMachine::init()
+bool StateManager::init()
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         Log::Error("Unable to initialize SDL" + Log::GetSDLError());
@@ -25,7 +25,7 @@ bool StateMachine::init()
     return true;
 }
 
-void StateMachine::run(int argc, char **argv)
+void StateManager::run(int argc, char **argv)
 {
     if (!init()) {
         Log::Error("Init failure " + Log::GetSDLError());
@@ -53,14 +53,14 @@ void StateMachine::run(int argc, char **argv)
 
 }
 
-void StateMachine::push(State *state)
+void StateManager::push(State *state)
 {
     m_states.push_back(state);
     m_states.back()->init();
     m_states.back()->run();
 }
 
-void StateMachine::change(State *state)
+void StateManager::change(State *state)
 {
     if (!m_states.empty()) {
         if (m_states.back()->getStateName() == state->getStateName())
@@ -76,7 +76,7 @@ void StateMachine::change(State *state)
     m_states.back()->run();
 }
 
-void StateMachine::pop()
+void StateManager::pop()
 {
     if (!m_states.empty()) {
         Log::Info("Popping..." + m_states.back()->m_stateName);
@@ -86,7 +86,7 @@ void StateMachine::pop()
     }
 }
 
-void StateMachine::quitGame()
+void StateManager::quitGame()
 {
     m_fsm_status = false;
 }

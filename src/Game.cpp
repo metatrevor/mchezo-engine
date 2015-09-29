@@ -52,8 +52,8 @@ void Game::update()
 {
     //State::update();
     if (testCollision(dynamic_cast<Object *>(m_objects[0]), dynamic_cast<Object *>(m_objects[1]))) {
-        StateMachine::instance().pop();
-        StateMachine::instance().push(new GameOverState());
+        StateManager::instance().pop();
+        StateManager::instance().push(new GameOverState());
     }
     m_level->update();
 }
@@ -65,7 +65,7 @@ void Game::exit()
 
 void Game::gameToPause()
 {
-    StateMachine::instance().push(new PauseState());
+    StateManager::instance().push(new PauseState());
 }
 
 bool Game::testCollision(Object *obj1, Object *obj2)

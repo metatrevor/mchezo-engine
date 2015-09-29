@@ -68,5 +68,5 @@ void GameOverState::gameOverToMenu()
 void GameOverState::gameOverToRestartGame()
 {
     Log::Info("GameOver to Restart Game clicked");
-    StateMachine::instance().push(new Game());
+    StateManager::instance().push(new Game());
 }

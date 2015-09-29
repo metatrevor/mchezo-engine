@@ -6,10 +6,10 @@
 #include "State.h"
 #include "Defines.h"
 
-class StateMachine
+class StateManager
 {
 public:
-    static StateMachine &instance();
+    static StateManager &instance();
 
     bool init();
 
@@ -26,9 +26,9 @@ public:
 private:
     std::vector<State *> m_states;
 
-    StateMachine();
+    StateManager();
 
-    ~StateMachine();
+    ~StateManager();
 
     State *m_currentState;
     Uint32 frameStart;

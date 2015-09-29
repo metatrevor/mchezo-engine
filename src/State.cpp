@@ -32,7 +32,7 @@ void State::handleEvents()
 {
     InputManager::instance().update();
     if (InputManager::instance().onQuit())
-        StateMachine::instance().quitGame();
+        StateManager::instance().quitGame();
 }
 
 void State::exit()

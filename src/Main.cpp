@@ -2,6 +2,6 @@
 
 int main(int argc, char *argv[])
 {
-    StateMachine::instance().run(argc, argv);
+    StateManager::instance().run(argc, argv);
     return 0;
 }

@@ -59,12 +59,12 @@ void PauseState::handleEvents()
 void PauseState::pauseToGame()
 {
     Log::Info("Pause to Game clicked");
-    StateMachine::instance().pop();
+    StateManager::instance().pop();
     Log::Info("Resuming Game state");
 }
 
 void PauseState::pauseToMenu()
 {
     Log::Info("Pause to Menu clicked");
-    StateMachine::instance().push(new MenuState());
+    StateManager::instance().push(new MenuState());
 }
