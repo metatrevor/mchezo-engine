@@ -4,7 +4,7 @@
 C++ Game Engine based on SDL
 
 #Note:
-The project is still in early development, and a hobby project not to be taken seriously.
+The project is still in early development, and a hobby project.
 
 The project in actual sense is not a true a game engine but rather a personal framework for use in developing 2d games,
 simulations and exploring the mechanics used in developing classical games.
@@ -30,12 +30,12 @@ https://github.com/andrewrk/tmxparser.git
 * StateMachine
 * Vectors
 * Levels
-* Basic States such as pause games
+* Basic Game States
 * Timer
 * Window Manager
 * Basic Game Object
 
-## RoadMap
+## Roadmap
 
 * Generic Object Manager
 * OpenGL Support
