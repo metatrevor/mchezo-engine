@@ -4,7 +4,7 @@
 C++ Game Engine based on SDL
 
 #Note:
-The project is still in early development, and a hobby project.
+The project is still in early development and a hobby project.
 
 The project in actual sense is not a true a game engine but rather a personal framework for use in developing 2d games,
 simulations and exploring the mechanics used in developing classical games.
