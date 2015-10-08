@@ -2,7 +2,7 @@
 #define TILELAYER_H_
 
 #include <vector>
-#include <Tmx.h>
+#include <tmxparser/Tmx.h>
 #include "Layer.h"
 #include "Vector2D.h"
 #include "Level.h"

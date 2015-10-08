@@ -5,7 +5,7 @@
 #include <string>
 #include <tinyxml2.h>
 #include "Layer.h"
-#include <Tmx.h>
+#include <tmxparser/Tmx.h>
 
 // The level class holds a ptr to the map, objects and custom layers
 // Referenced to the layers in map by with an index
