@@ -30,8 +30,6 @@ void MenuState::update()
 
 void MenuState::exit()
 {
-    TextureManager::instance().deleteTexture("play");
-    TextureManager::instance().deleteTexture("exit");
     Log::Info("Exiting Menustate...");
 }
 

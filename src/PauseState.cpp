@@ -11,10 +11,6 @@ bool PauseState::init()
 {
     m_stateName = "PAUSE";
     Log::Info("Entering Pausestate...\n");
-    TextureManager::instance().loadTexture("resume", "assets/textures/resume.png");
-    TextureManager::instance().loadTexture("main_menu", "assets/textures/main_menu.png");
-    m_objects.push_back(new MenuButton(200, 100, 200, 80, "resume", pauseToGame));
-    m_objects.push_back(new MenuButton(200, 300, 200, 80, "main_menu", pauseToMenu));
     return true;
 }
 
@@ -46,8 +42,6 @@ void PauseState::update()
 void PauseState::exit()
 {
     State::exit();
-    TextureManager::instance().deleteTexture("main_menu");
-    TextureManager::instance().deleteTexture("resume");
     Log::Info("Exiting Pausestate...\n");
 }
 

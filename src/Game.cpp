@@ -11,13 +11,6 @@ Game::Game()
 bool Game::init()
 {
     m_level = new Level();
-
-    m_level->parseLevel("assets/textures/map1.tmx");
-
-    TextureManager::instance().loadTexture("animate", "assets/textures/player.png");
-    TextureManager::instance().loadTexture("enemy", "assets/textures/enemy.png");
-    m_objects.push_back(new Player(500, 100, 128, 55, "animate"));
-    m_objects.push_back(new Enemy(100, 100, 128, 55, "enemy"));
     m_stateName = "GAME";
     Log::Info("Entering Gamestate...");
     return true;
