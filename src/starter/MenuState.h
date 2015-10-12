@@ -1,10 +1,10 @@
 #ifndef MENUSTATE_H
 #define MENUSTATE_H
 
-#include "State.h"
-#include "Log.h"
-#include "Object.h"
-#include "StateManager.h"
+#include "../Mchezo/State.h"
+#include "../Mchezo/Log.h"
+#include "../Mchezo/Object.h"
+#include "../Mchezo/StateManager.h"
 
 class MenuState : public State
 {

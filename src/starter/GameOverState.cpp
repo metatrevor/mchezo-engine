@@ -1,8 +1,9 @@
+#include "../Mchezo/MenuButton.h"
+#include "../Mchezo/StateManager.h"
+#include "../Mchezo/AnimatedGraphic.h"
 #include "GameOverState.h"
-#include "MenuButton.h"
-#include "StateManager.h"
 #include "Game.h"
-#include "AnimatedGraphic.h"
+
 
 GameOverState::GameOverState()
 {

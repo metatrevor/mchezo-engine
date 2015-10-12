@@ -1,15 +1,14 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "TextureManager.h"
-#include "Window.h"
-
-#include "Object.h"
+#include "../Mchezo/TextureManager.h"
+#include "../Mchezo/Window.h"
+#include "../Mchezo/State.h"
+#include "../Mchezo/InputManager.h"
+#include "../Mchezo/Level.h"
+#include "../Mchezo/Object.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "State.h"
-#include "InputManager.h"
-#include "Level.h"
 
 #include <vector>
 

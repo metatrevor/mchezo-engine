@@ -1,6 +1,6 @@
+#include "../Mchezo/MenuButton.h"
+#include "../Mchezo/StateManager.h"
 #include "PauseState.h"
-#include "MenuButton.h"
-#include "StateManager.h"
 #include "MenuState.h"
 
 PauseState::PauseState()

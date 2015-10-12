@@ -1,5 +1,5 @@
 #include "MenuState.h"
-#include "MenuButton.h"
+#include "../Mchezo/MenuButton.h"
 #include "Game.h"
 
 MenuState::MenuState()

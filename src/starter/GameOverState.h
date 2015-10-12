@@ -1,8 +1,8 @@
 #ifndef GAMEOVERSTATE_H
 #define GAMEOVERSTATE_H
 
-#include "Object.h"
-#include "State.h"
+#include "../Mchezo/Object.h"
+#include "../Mchezo/State.h"
 #include <vector>
 
 class GameOverState : public State

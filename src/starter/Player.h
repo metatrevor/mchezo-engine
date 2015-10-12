@@ -1,8 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Object.h"
-#include "InputManager.h"
+#include "../Mchezo/Object.h"
+#include "../Mchezo/InputManager.h"
 
 enum
 {

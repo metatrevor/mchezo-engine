@@ -1,5 +1,4 @@
 #include "StateManager.h"
-#include "MenuState.h"
 
 StateManager &StateManager::instance()
 {
@@ -20,7 +19,6 @@ bool StateManager::init()
         return false;
     }
     TextureManager::instance().init();
-    instance().change(new MenuState());
     m_fsm_status = true;
     return true;
 }

@@ -1,8 +1,8 @@
 #ifndef PAUSESTATE_H
 #define PAUSESTATE_H
 
-#include "Object.h"
-#include "State.h"
+#include "../Mchezo/Object.h"
+#include "../Mchezo/State.h"
 #include <vector>
 
 class PauseState : public State
