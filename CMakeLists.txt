@@ -7,12 +7,6 @@ set(SOURCE_FILES
         src/Mchezo/Defines.h
         src/Mchezo/AnimatedGraphic.cpp
         src/Mchezo/AnimatedGraphic.h
-        src/starter/Enemy.cpp
-        src/starter/Enemy.h
-        src/starter/Game.cpp
-        src/starter/Game.h
-        src/starter/GameOverState.cpp
-        src/starter/GameOverState.h
         src/Mchezo/InputManager.cpp
         src/Mchezo/InputManager.h
         src/Mchezo/Layer.cpp
@@ -21,17 +15,10 @@ set(SOURCE_FILES
         src/Mchezo/Level.cpp
         src/Mchezo/Log.cpp
         src/Mchezo/Log.h
-        src/starter/Main.cpp
         src/Mchezo/MenuButton.cpp
         src/Mchezo/MenuButton.h
-        src/starter/MenuState.cpp
-        src/starter/MenuState.h
         src/Mchezo/Object.cpp
         src/Mchezo/Object.h
-        src/starter/PauseState.cpp
-        src/starter/PauseState.h
-        src/starter/Player.cpp
-        src/starter/Player.h
         src/Mchezo/SoundManager.h
         src/Mchezo/SoundManager.cpp
         src/Mchezo/State.h
@@ -48,7 +35,21 @@ set(SOURCE_FILES
         src/Mchezo/Vector2D.h
         src/Mchezo/Window.cpp
         src/Mchezo/Window.h
-    #Common library
+
+        # Starter Code
+        src/starter/Main.cpp
+        src/starter/Enemy.cpp
+        src/starter/Enemy.h
+        src/starter/Game.cpp
+        src/starter/Game.h
+        src/starter/GameOverState.cpp
+        src/starter/GameOverState.h
+        src/starter/MenuState.cpp
+        src/starter/MenuState.h
+        src/starter/PauseState.cpp
+        src/starter/PauseState.h
+        src/starter/Player.cpp
+        src/starter/Player.h
     )
 
 add_executable(Mchezo-engine ${SOURCE_FILES})
