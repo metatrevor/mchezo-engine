@@ -23,11 +23,15 @@ bool StateManager::init()
     return true;
 }
 
-void StateManager::run(int argc, char **argv)
+void StateManager::run(int argc, char **argv, State *initialState)
 {
     if (!init()) {
         Log::Error("Init failure " + Log::GetSDLError());
         exit(EXIT_FAILURE);
+    }
+
+    else {
+        instance().push(initialState);
     }
 
     if (m_fsm_status) {

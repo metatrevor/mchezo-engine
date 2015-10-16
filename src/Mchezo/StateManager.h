@@ -13,7 +13,7 @@ public:
 
     bool init();
 
-    void run(int argc, char **argv);
+    void run(int argc, char **argv, State *initialState);
 
     void push(State *state);
 
