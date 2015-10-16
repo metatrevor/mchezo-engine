@@ -37,19 +37,19 @@ set(SOURCE_FILES
         src/Mchezo/Window.h
 
         # Starter Code
-        src/starter/Main.cpp
-        src/starter/Enemy.cpp
-        src/starter/Enemy.h
-        src/starter/Game.cpp
-        src/starter/Game.h
-        src/starter/GameOverState.cpp
-        src/starter/GameOverState.h
-        src/starter/MenuState.cpp
-        src/starter/MenuState.h
-        src/starter/PauseState.cpp
-        src/starter/PauseState.h
-        src/starter/Player.cpp
-        src/starter/Player.h
+        src/Starter/Main.cpp
+        src/Starter/Enemy.cpp
+        src/Starter/Enemy.h
+        src/Starter/Game.cpp
+        src/Starter/Game.h
+        src/Starter/GameOverState.cpp
+        src/Starter/GameOverState.h
+        src/Starter/MenuState.cpp
+        src/Starter/MenuState.h
+        src/Starter/PauseState.cpp
+        src/Starter/PauseState.h
+        src/Starter/Player.cpp
+        src/Starter/Player.h
     )
 
 add_executable(Mchezo-engine ${SOURCE_FILES})
