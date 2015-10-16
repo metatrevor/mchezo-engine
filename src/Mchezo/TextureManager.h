@@ -35,6 +35,8 @@ public:
 
     SDL_Texture *getTexture(std::string keyName);
 
+    void setTextureAlphaMod(std::string keyName, Uint8 alpha);
+
     void deleteTexture(std::string keyName);
 
     void cleanup();

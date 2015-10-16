@@ -137,3 +137,9 @@ void TextureManager::drawTile(std::string id, int margin,
         Log::Error("SDL_RenderCopyEx for texture " + id + Log::GetSDLError());
     }
 }
+
+
+void TextureManager::setTextureAlphaMod(std::string keyName, Uint8 alpha)
+{
+    SDL_SetTextureAlphaMod(getTexture(keyName), alpha);
+}
