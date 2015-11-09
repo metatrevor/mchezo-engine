@@ -90,6 +90,7 @@ void StateManager::pop()
 
 void StateManager::quitGame()
 {
+    m_fsm_status = false;
     if(!m_states.empty()) {
         for(std::vector<State *>::iterator it = m_states.begin(); it != m_states.end(); ++it){
             (*it)->exit();
