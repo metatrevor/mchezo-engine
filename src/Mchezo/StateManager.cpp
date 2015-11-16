@@ -48,11 +48,7 @@ void StateManager::run(int argc, char **argv, State *initialState)
             }
         }
         while (m_fsm_status);
-        m_states.back()->exit();
-        m_states.clear();
     }
-
-
 }
 
 void StateManager::push(State *state)
