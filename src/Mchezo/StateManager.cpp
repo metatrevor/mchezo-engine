@@ -35,7 +35,9 @@ void StateManager::run(int argc, char **argv, State *initialState)
     }
 
     if (m_fsm_status) {
-        do {
+
+        for(;;) {
+
             frameStart = SDL_GetTicks();
             m_states.back()->handleEvents();
             if(!m_fsm_status) {
@@ -49,8 +51,8 @@ void StateManager::run(int argc, char **argv, State *initialState)
             if (frameTime < FRAMEDELTA) {
                 SDL_Delay((Uint32) (FRAMEDELTA - frameTime));
             }
+
         }
-        while (m_fsm_status);
     }
 }
 
