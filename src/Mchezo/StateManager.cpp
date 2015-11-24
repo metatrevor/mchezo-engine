@@ -38,6 +38,9 @@ void StateManager::run(int argc, char **argv, State *initialState)
         do {
             frameStart = SDL_GetTicks();
             m_states.back()->handleEvents();
+            if(!m_fsm_status) {
+                break;
+            }
             m_states.back()->update();
             m_states.back()->render();
 
