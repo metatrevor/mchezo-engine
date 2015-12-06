@@ -1,0 +1,48 @@
+set(SOURCE_FILES
+        src/Mchezo/Defines.h
+        src/Mchezo/AnimatedGraphic.cpp
+        src/Mchezo/AnimatedGraphic.h
+        src/Mchezo/InputManager.cpp
+        src/Mchezo/InputManager.h
+        src/Mchezo/Layer.cpp
+        src/Mchezo/Layer.h
+        src/Mchezo/Level.h
+        src/Mchezo/Level.cpp
+        src/Mchezo/Log.cpp
+        src/Mchezo/Log.h
+        src/Mchezo/MenuButton.cpp
+        src/Mchezo/MenuButton.h
+        src/Mchezo/Object.cpp
+        src/Mchezo/Object.h
+        src/Mchezo/SoundManager.h
+        src/Mchezo/SoundManager.cpp
+        src/Mchezo/State.h
+        src/Mchezo/State.cpp
+        src/Mchezo/StateManager.cpp
+        src/Mchezo/StateManager.h
+        src/Mchezo/TextureManager.cpp
+        src/Mchezo/TextureManager.h
+        src/Mchezo/Timer.cpp
+        src/Mchezo/Timer.h
+        src/Mchezo/TileLayer.h
+        src/Mchezo/TileLayer.cpp
+        src/Mchezo/Vector2D.cpp
+        src/Mchezo/Vector2D.h
+        src/Mchezo/Window.cpp
+        src/Mchezo/Window.h
+
+# Starter Code
+        src/Starter/Main.cpp
+        src/Starter/Enemy.cpp
+        src/Starter/Enemy.h
+        src/Starter/Game.cpp
+        src/Starter/Game.h
+        src/Starter/GameOverState.cpp
+        src/Starter/GameOverState.h
+        src/Starter/MenuState.cpp
+        src/Starter/MenuState.h
+        src/Starter/PauseState.cpp
+        src/Starter/PauseState.h
+        src/Starter/Player.cpp
+        src/Starter/Player.h
+)
