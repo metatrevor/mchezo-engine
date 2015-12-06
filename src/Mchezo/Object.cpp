@@ -14,6 +14,8 @@ Object::Object(int x, int y, int width, int height, std::string textureName)
 
 void Object::draw()
 {
+    // TODO : Replace behaviour below with something useful
+
     if (m_velocity.getX() > 0)
         TextureManager::instance().drawFrame(m_textureKeyName, (int) m_position.getX(), (int) m_position.getY(),
                                              m_width, m_height,
@@ -21,7 +23,7 @@ void Object::draw()
     else
         TextureManager::instance().drawFrame(m_textureKeyName, (int) m_position.getX(), (int) m_position.getY(),
                                              m_width, m_height,
-                                             m_currentRow, m_currentFrame);
+                                             m_currentRow, m_currentFrame, SDL_FLIP_NONE);
 }
 
 void Object::update()
