@@ -9,18 +9,22 @@ The project is still in early development and a hobby project.
 The project in actual sense is not a true a game engine but rather a personal framework for use in developing 2d games,
 simulations and exploring the mechanics used in developing classical games.
 
-#Dependencies for building the project:
-The project itself compiles but is not executable as it only provides a basic 
+The project itself compiles but is not executable as it only provides a basic
 framework for the development of games.
+
+#Usage:
+This micro framework is not intended to be a dynamic or static lib.
+Its meant to be forked and built upon or the relevant parts extracted.
+
+
+#Dependencies for building the project:
 
 * sdl2
 * sdl2_image
 * sdl2_ttf
 * sdl2_mixer
 * libtinyxml2
-* libtmxparser
-
-https://github.com/andrewrk/tmxparser.git
+* libtmxparser - https://github.com/andrewrk/tmxparser
 
 ##Features
 
@@ -43,4 +47,5 @@ https://github.com/andrewrk/tmxparser.git
 * Networking
 * Tmx Object Parsing
 * Joystick Support
+* Samples
 
