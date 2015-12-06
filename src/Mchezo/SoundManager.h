@@ -32,9 +32,11 @@ private:
 
     ~SoundManager();
 
-    SoundManager(const SoundManager &);
+    SoundManager(const SoundManager &)
+    { }
 
-    SoundManager &operator=(const SoundManager &);
+    SoundManager &operator=(const SoundManager &)
+    { }
 
     std::map<std::string, Mix_Chunk *> m_soundbuffers;
     std::map<std::string, Mix_Music *> m_musicbuffers;

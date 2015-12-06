@@ -23,7 +23,7 @@ void Level::update()
     }
 }
 
-void Level::parseLevel(const char *levelFile)
+Level *Level::parseLevel(const char *levelFile)
 {
     //Load with TMX Parser
 
@@ -61,6 +61,8 @@ void Level::parseLevel(const char *levelFile)
     levelDocument.LoadFile(levelFile);
 
 
+    //Load root node
+    tinyxml2::XMLElement *root = levelDocument.RootElement();
 
     //Parse the tilesets
 
