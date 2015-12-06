@@ -25,7 +25,7 @@ public:
     //Render the layers
     void render();
 
-    Level *parseLevel(const char *levelFile);
+    void parseLevel(const char *levelFile);
 
     std::vector<Layer *> *getLayers()
     {
