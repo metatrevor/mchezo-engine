@@ -35,11 +35,9 @@ private:
     ~Log()
     { Destroy(); }
 
-    Log(Log const &)
-    { };
+    Log(Log const &);
 
-    Log &operator=(Log const &)
-    { };
+    Log &operator=(Log const &);
 
     void Print(std::string message);
 
